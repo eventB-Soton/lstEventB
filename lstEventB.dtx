@@ -1,0 +1,307 @@
+% \iffalse meta-comment
+% 
+% lstEventB.ins
+% 
+% Copyright (C) 2017 by Thai Son Hoang and Chenyang Zhu
+% <T dot S dot Hoang and C dot Zhu at ecs dot soton dot ac dot uk>
+% --------------------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+% 
+%      http://www.latex-project.org/lppl.txt
+% 
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+% 
+% This work has the LPPL maintenance status "author-maintained".
+% 
+% The Current Maintainer of this work is T.S. Hoang and C. Zhu.
+%
+% This work consists of the files lstEventB.dtx, lstEventB.ins,
+% the derived file lstEventB.sty, the generated documentation
+% lstEventB.pdf, and some sample requirements documents.
+% 
+% \fi
+% 
+% \iffalse
+%<lstEventB>\NeedsTeXFormat{LaTeX2e}\relax
+%<lstEventB>\ProvidesPackage{lstEventB}
+%<lstEventB>    [2017/06/06 v0.1 Package for listing Event-B code] 
+% 
+%<*driver> 
+\documentclass[a4paper]{ltxdoc}
+\usepackage{lstEventB}
+\EnableCrossrefs
+% ^^A\CodelineIndex
+\PageIndex
+\RecordChanges
+
+\begin{document}
+\DocInput{lstEventB.dtx}
+\end{document}
+%</driver>
+% \fi
+% 
+% \CheckSum{0}
+% 
+% \CharacterTable
+% {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+% Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+% Digits        \0\1\2\3\4\5\6\7\8\9
+% Exclamation   \!     Double quote  \"     Hash (number) \#
+% Dollar        \$     Percent       \%     Ampersand     \&
+% Acute accent  \'     Left paren    \(     Right paren   \)
+% Asterisk      \*     Plus          \+     Comma         \,
+% Minus         \-     Point         \.     Solidus       \/
+% Colon         \:     Semicolon     \;     Less than     \<
+% Equals        \=     Greater than  \>     Question mark \?
+% Commercial at \@     Left bracket  \[     Backslash     \\
+% Right bracket \]     Circumflex    \^     Underscore    \_
+% Grave accent  \`     Left brace    \{     Vertical bar  \|
+% Right brace   \}     Tilde         \~}
+% 
+% 
+% \changes{v0.0}{2016/06/06}{Initial version}
+% 
+% \GetFileInfo{lstEventB.sty}
+% 
+% \DoNotIndex{\\}
+% \DoNotIndex{\DeclareOption}
+% \DoNotIndex{\ProcessOptions}
+% \DoNotIndex{\RequirePackage}
+% \DoNotIndex{\arabic}
+% \DoNotIndex{\begin}
+% \DoNotIndex{\csname,\csuse}
+% \DoNotIndex{\def,\do,\dolistloop}
+% \DoNotIndex{\end,\endcsname,\expandafter}
+% \DoNotIndex{\hline}
+% \DoNotIndex{\ifstrequal,\iftoggle,\item}
+% \DoNotIndex{\label,\labelformat,\listadd}
+% \DoNotIndex{\medskip}
+% \DoNotIndex{\newcommand,\newcounter,\newenvironment,\newtoggle,\nomenclature}
+% \DoNotIndex{\quad}
+% \DoNotIndex{\renewcommand,\renewenvironment,\ref,\refstepcounter}
+% \DoNotIndex{\setcounter,\small}
+% \DoNotIndex{\textsf,\textwidth,\togglefalse,\toggletrue}
+% \DoNotIndex{\value}
+% \DoNotIndex{\xspace}
+%
+% \title{The \textsf{lstEventB} package\thanks{This document
+% corresponds to \textsf{lstEventB}~\fileversion, dated~\filedate.}}
+% \author{Thai Son Hoang \\ ECS, University of Southampton \\ \texttt{<T dot S dot Hoang at ecs dot
+% soton dot ac dot uk>}}
+% \date{June 6, 2017}
+% 
+% \maketitle
+% 
+% ^^A %%%%% Abstract %%%%%
+% \begin{abstract}
+%   This package provides macros for typesetting Event-B code.  It
+%   was developed at the University of Southampton.
+% \end{abstract}
+% 
+% ^^A %%%%% Table of contents %%%%%
+% \tableofcontents
+% 
+% ^^A %%%%% Introduction %%%%%
+% \section{Introduction}
+% 
+% This package was developed in order to ease the listing of
+% Event-B code in \LaTeX{}.
+% 
+% ^^A %%%%% Usage %%%%%%
+% \section{Usage}
+% 
+% Just like any other package, you need to request this package with a
+% |\usepackage| command in the preamble.
+%
+% So in the simpler case, one just types
+% 
+% \indent |\usepackage{lstEventB}|
+%
+% \noindent to load the package  
+% 
+% \StopEventually{
+% \PrintChanges
+% \PrintIndex
+% }
+%   
+% ^^A %%%%% Implementation %%%%%
+% \section{Implementation}
+%
+% ^^A %%% Package loading %%% 
+% The implementation is quite straightforward.  Our implementation is
+% based on the |listings| package.
+% 
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>
+%<lstEventB>%%%%% BEGIN Package loading %%%%%
+% \fi ^^A END Produce comments only in the resulting style file
+%
+%    \begin{macrocode}
+\RequirePackage{listings}
+\RequirePackage{xspace}
+\RequirePackage{nomencl}
+%    \end{macrocode}
+%
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>%%%%% END Package loading %%%%%
+%<lstEventB>
+% \fi ^^A END Produce comments only in the resulting style file
+%
+% \begin{macro}{\newabbrev}
+%   \changes{v1.0}{2013/04/22}{Macro created}
+%   The |newabbrev| makes use of the worker macro |newfullabbrev| for
+%   creating abbreviations macros.
+% 
+% \iffalse^^A BEGIN Produce comments only in the resulting style file
+%<*lstEventB>
+
+% Meta-macro to create abbreviation macros.
+%
+% Arguments:
+% 1. (Optional) String to be used as macro
+% 2. The abbreviation (also used as the macro if the optional argument
+%    is empty)
+% 3. The full string expansion.
+%
+% Usage:
+% - \newabbrev{SME}{Small and Medium-sized Enterprise} will create
+% macros \SME will expand as Small and Medium-sized Enterprise (SME)
+% and \SMEs will expand as Small and Medium-sized Enterprises (SMEs).
+% - \newabbrev[randd]{R\&D}{Research and Development} will create
+% macros \randd will expand as Research and Development (R\&D)
+% and \randds will expand as Research and Developments (R\&Ds).
+%</lstEventB>
+% \fi^^A END Produce comments only in the resulting style file
+%    \begin{macrocode}
+\newcommand{\B@font}{\sffamily}
+\newcommand{\setBfont}[1]{%
+  \renewcommand{\B@font}{#1}%
+}
+
+\lstMakeShortInline[language=EventB, breaklines=f, basicstyle=\B@font\normal]|
+\lst@definelanguage{EventB}{
+  basicstyle=\B@font\scriptsize,
+  keywords={
+    context,sets,constants,axioms, do, od,%
+    machine,sees,refines,variables,invariants,events,with,extended,theorem,%
+    begin,then,end,when,any,where,theory,types,operators,for,prefix,infix,imports,
+    associative,commutative
+  },
+  keywordstyle=\color{red}\bfseries,
+  identifierstyle=\color{orange},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{blue}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+  columns=fullflexible,
+  numberbychapter=false,
+  frame=top,frame=bottom,
+  basicstyle=\ttfamily\scriptsize,    % the size of the fonts that are used for the code
+  stepnumber=1,                           % the step between two line-numbers. If it is 1 each line will be numbered
+  numberstyle=\tiny,
+  numbersep=5pt,                         % how far the line-numbers are from the code
+  tabsize=2,                              % tab size in blank spaces
+  extendedchars=true,                     %
+  breaklines=true,                        % sets automatic line breaking
+  captionpos=b,                           % sets the caption-position to top
+  mathescape=false,
+  stringstyle=\color{black}\ttfamily, % Farbe der String
+  keywordstyle=\color{black}\ttfamily, % Farbe der String
+  showspaces=false,           % Leerzeichen anzeigen ?
+  showtabs=false,             % Tabs anzeigen ?
+  xleftmargin=10pt,
+  framexleftmargin=10pt,
+  framexrightmargin=0pt,
+  framexbottommargin=5pt,
+  framextopmargin=5pt,
+  showstringspaces=false,      % Leerzeichen in Strings anzeigen ?
+  escapechar=\%,
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,
+  inputencoding=utf8,         % UTF-8 input encoding
+  extendedchars=true,         % Use extended characters
+  literate=
+  {⩥}{{$\ransub$}}1
+  {▷}{{$\ranres$}}1
+  {∩}{{$\binter$ }}1
+  {∪}{{$\bunion$ }}1
+  {↦}{{$\mapsto$ }}1
+  {→}{{$\tfun$ }}1
+  {⊈}{{$\nsubset$}}1
+  {⊄}{{$\nsubseteq$}}1
+  {∉}{{$\notin$ }}1
+  {⇔}{{$\leqv$}}1
+  {⇒}{{$\limp$}}1
+  {∧}{{$\land$}}1
+  {∀}{{$\forall$ }}1
+  {}{{$\ovl$ }}1 
+  {≠}{{$\neq$ }}1 
+  {≤}{{$\leq$ }}1 
+  {≥}{{$\geq$ }}1 
+  {⊂}{{$\subset$ }}1 
+  {⊆}{{$\subseteq$ }}1
+  {↔}{{$\rel$ }}1
+  {⤖}{{$\tbij$ }}1
+  {⇸}{{$\pfun$ }}1
+  {⤔}{{$\pinj$ }}1
+  {↣}{{$\tinj$ }}1
+  {⤀}{{$\psur$ }}1
+  {↠}{{$\tsur$ }}1
+  {∅}{{$\emptyset$ }}1
+  {∖}{{$\setminus$ }}1
+  {×}{{$\cprod$ }}1 
+  {⊗}{{$\dprod$ }}1
+  {∼}{{$\sim$}}1
+  {⩤}{{$\domsub$ }}1
+  {◁}{{$\domres$ }}1
+  {λ}{{$\lambda$ }}1
+  {‥}{{$\upto$ }}1
+  {·}{{$\qdot$ }}1
+  {^}{{$\hat$ }}1
+  {≔}{{$\bcmeq$ }}1
+  {:∈}{{$\bcmin$ }}1
+  {:∣}{{$\bcmsuch$ }}1
+  {∈}{{$\in$ }}1
+  {↦}{{$\mapsto$ }}1
+  {ℕ1}{{$\natn$ }}1 
+  {ℕ}{{$\nat$ }}1
+  {ℙ1}{{$\pown$ }}1 
+  {ℙ}{{$\pow$ }}1 
+  {ℤ}{{$\intg$ }}1 
+  {⋂}{{$\Inter$ }}1 
+  {⋃}{{$\Union$ }}1 
+  {∨}{{$\lor$ }}1 
+  {⊤}{{$\btrue$ }}1 
+  {⊥}{{$\bfalse$ }}1
+  {∘}{{$\circ$ }}1
+  {⦂}{{$\oftype$ }}1  
+  {∣}{{$\mid$ }}1 
+  {+}{{$+$ }}1 
+  {−}{{$-$ }}1 
+  {*}{{$*$ }}1 
+  {÷}{{$/$ }}1 
+  {ℝ}{{$\mathbb{R}$ }}1 
+  {prj1}{{$\prjone$ }}1 
+  {prj2}{{$\prjtwo$ }}1 
+  {==}{{$\widehat{=}$ }}1 
+  {¬}{{$\neg$ }}1 
+, % Special symbols
+ }
+
+%    \end{macrocode}
+% \end{macro} ^^A \newabbrev
+%
+%
+% \Finale
+\endinput
