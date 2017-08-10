@@ -1,0 +1,96 @@
+machine Sensor_m3_Ctrl
+
+refines
+
+	Sensor_m2_Snsr
+
+variables
+
+	SNSR
+
+	DEP
+
+	Snsr_01
+
+	Snsr_10
+
+	ctrl_snsr
+
+	ctrl_dep
+
+	ctrl_snsr_01
+
+	ctrl_snsr_10
+
+invariants
+
+	@inv2_1:
+	"Snsr_01 = FALSE ∧ Snsr_10 = FALSE ∧ ctrl_snsr_01 = FALSE ∧ ctrl_snsr_10 = FALSE ⇒ ctrl_snsr = SNSR"
+
+	@inv2_2: "ctrl_dep ∈ ℕ"
+
+	@inv2_3: "Snsr_10 = FALSE ∧ ctrl_snsr_10 = FALSE ⇒ ctrl_dep = DEP"
+
+	@inv2_4: "Snsr_10 = TRUE ∨ ctrl_snsr_10 = TRUE ⇒ ctrl_dep = DEP − 1"
+
+	@inv2_5: "ctrl_snsr_01 = TRUE ⇒ SNSR = TRUE"
+
+	@inv2_6: "ctrl_snsr_10 = TRUE ⇒ SNSR = FALSE"
+
+	@inv2_7: "ctrl_snsr_01 = TRUE ⇒ Snsr_01 = FALSE"
+
+	@inv2_8: "ctrl_snsr_10 = TRUE ⇒ Snsr_10 = FALSE"
+
+events
+
+	INITIALISATION extended
+	refines INITIALISATION
+	begin
+		@act5: "ctrl_snsr ≔ FALSE"
+		@act6: "ctrl_dep ≔ 0"
+		@act7: "ctrl_snsr_01 ≔ FALSE"
+		@act8: "ctrl_snsr_10 ≔ FALSE"
+	end
+
+	SNSR_on extended
+	refines SNSR_on
+	when
+		@grd3: "ctrl_snsr_10 = FALSE"
+	end
+
+	SNSR_off extended
+	refines SNSR_off
+	when
+		@grd3: "ctrl_snsr_01 = FALSE"
+	end
+
+	ctrl_Senses_Snsr_01 extended
+	refines ctrl_Senses_Snsr_01
+	begin
+		@act2: "ctrl_snsr_01 ≔ TRUE"
+	end
+
+	ctrl_Senses_Snsr_10 extended
+	refines ctrl_Senses_Snsr_10
+	begin
+		@act2: "ctrl_snsr_10 ≔ TRUE"
+	end
+
+	ctrl_on
+	when
+		@grd1: "ctrl_snsr_01 = TRUE"
+	then
+		@act1: "ctrl_snsr_01 ≔ FALSE"
+		@act2: "ctrl_snsr ≔ TRUE"
+	end
+
+	ctrl_off
+	when
+		@grd1: "ctrl_snsr_10 = TRUE"
+	then
+		@act1: "ctrl_snsr_10 ≔ FALSE"
+		@act2: "ctrl_snsr ≔ FALSE"
+		@act3: "ctrl_dep ≔ ctrl_dep + 1"
+	end
+
+end

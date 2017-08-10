@@ -1,0 +1,187 @@
+%%
+%% This is file `lstEventB.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% lstEventB.dtx  (with options: `lstEventB')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 2017 by Thai Son Hoang and Chenyang Zhu
+%% <T dot S dot Hoang and C dot Zhu at ecs dot soton dot ac dot uk>
+%% 
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%% 
+%% This work has the LPPL maintenance status "author-maintained".
+%% 
+%% The Current Maintainer of this work is T. S. Hoang and C. Zhu.
+%% 
+\NeedsTeXFormat{LaTeX2e}\relax
+\ProvidesPackage{lstEventB}
+    [2017/08/10 v0.1 Package for listing Event-B code]
+
+%%%%% BEGIN Package loading %%%%%
+\RequirePackage{listings}
+\RequirePackage{xspace}
+\RequirePackage{xcolor}
+\RequirePackage{bsymb}
+\RequirePackage{xargs}
+%%%%% END Package loading %%%%%
+
+%%%%% BEGIN Declaration of options %%%%%
+% ========================
+
+% Macro to set the colour of the Event-B keywords.
+% The default colour is black.
+\newcommand{\EventB@SetKeywordColour}[1]{%
+  \colorlet{EventB@keywordcolour}{#1}%
+}
+\EventB@SetKeywordColour{black}
+
+% Macro to set the colour of the Event-B secondary keywords.
+% The default colour is black.
+\newcommand{\EventB@SetNdKeywordColour}[1]{%
+  \colorlet{EventB@ndkeywordcolour}{#1}%
+}
+\EventB@SetNdKeywordColour{black}
+
+% Macro to set the colour of Event-B identifiers.
+% The default colour is black.
+\newcommand{\EventB@SetIdentifierColour}[1]{%
+  \colorlet{EventB@identifiercolour}{#1}%
+}
+\EventB@SetIdentifierColour{black}
+
+% Macro to set the colour of Event-B comments.
+% The default colour is black.
+\newcommand{\EventB@SetCommentColour}[1]{%
+  \colorlet{EventB@commentcolour}{#1}%
+}
+\EventB@SetCommentColour{black}
+
+% Macro to set the colour of Event-B formulae.
+% The default colour is black.
+\newcommand{\EventB@SetFormulaColour}[1]{%
+  \colorlet{EventB@formulacolour}{#1}%
+}
+\EventB@SetFormulaColour{black}
+
+% Declaration of the *colour* option.
+\DeclareOption{colour}{
+  \EventB@SetKeywordColour{red}
+  \EventB@SetNdKeywordColour{red}
+  \EventB@SetIdentifierColour{purple}
+  \EventB@SetCommentColour{green}
+  \EventB@SetFormulaColour{blue}
+}
+
+% Declaration of the *color* option as an alias of *colour*.
+\DeclareOption{color}{
+  \ExecuteOptions{colour}
+}
+%%%%% END Declaration of options %%%%%
+
+%%%%% BEGIN Execution of options %%%%%
+% ========================
+
+\ProcessOptions
+%%%%% END Execution of options %%%%%
+%%%%% BEGIN Typesetting of the Event-B Language %%%%%
+% ===================================
+
+% Defining the Event-B language
+\lstdefinelanguage{Event-B}{%
+  basicstyle=\rmfamily\footnotesize,
+  keywords={%
+    % Keywords for contexts
+    context,extends,sets,constants,axioms,theorem,end,%
+    % Keywords for machines
+    machine,sees,refines,variables,invariants,variant,events,%
+  },%
+  keywordstyle=\color{EventB@keywordcolour}\bf\sffamily,%
+  sensitive=false,
+  ndkeywords={%
+    % Keywords for events
+    extended,theorem,any,where,when,with,begin,then%
+  },%
+  ndkeywordstyle=\color{EventB@ndkeywordcolour}\bf\sffamily,%
+  identifierstyle=\color{EventB@identifiercolour}\sffamily,
+  comment=[l]{//},%
+  morecomment=[s]{/*}{*/},%
+  commentstyle=\color{EventB@commentcolour}\rmfamily,%
+  stringstyle=\color{EventB@formulacolour}\sffamily,
+  string=[b]",
+  showstringspaces=false, % Do not show the space in formulae
+  inputencoding=utf8, % Allow UTF-8 input encoding
+  extendedchars=true, % Use extended characters
+  literate= % Event-B mathematical symbols
+  {≔}{{$\bcmeq$}{ }}2%
+  {⊆}{{$\subseteq$}}1%
+  {≠}{{$\neq$}}1%
+  {∀}{{$\forall$}}1%
+  {·}{{$\qdot$}}1%
+  {∈}{{$\in$}{ }}2%
+  {⇒}{{$\limp$}}1%
+  {∧}{{$\land$}}1%
+  {∅}{{$\emptyset$}}1%
+  {→}{{$\tfun$}}1%
+  {∖}{{$\setminus$}}1%
+  {⩤}{{$\domsub$}}1%
+  {⊥}{{$\bfalse$}}1%
+  {∩}{{$\binter$}}1%
+  {∪}{{$\bunion$}}1%
+  {⇔}{{$\leqv$}}1%
+  {⇸}{{$\pfun$}}1%
+  {∼}{{$\sim$}}1%
+  {↦}{{$\mapsto$ }}1%
+  {∉}{{$\notin$ }}1%
+  {ℕ}{{$\nat$}}1%
+  , % End of Event-B mathematical symbols
+}
+
+% Type setting inline Event-B code using |
+\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]|
+
+% Multi-line Event-B code should be wrapped in EventBcode environment.
+\lstnewenvironment{EventBcode}{\lstset{language=Event-B}}{}
+\lstset{%
+  columns=fullflexible, % The columns are fully flexible.
+  numberbychapter=false,
+  frame=top,frame=bottom, % There are line (frame at top and bottom).
+  stepnumber=1, % the step between two line-numbers. If it is 1 each line will be numbered
+  numberstyle=\tiny,
+  numbersep=5pt, % how far the line-numbers are from the code
+  tabsize=2, % tab size in blank spaces
+  breaklines=true, % sets automatic line breaking
+  captionpos=b, % sets the caption-position to top
+  mathescape=false,
+  showspaces=false, % Do not show spaces
+  showtabs=false, % Do not show tabs
+  xleftmargin=10pt,
+  framexleftmargin=10pt,
+  framexrightmargin=0pt,
+  framexbottommargin=5pt,
+  framextopmargin=5pt,
+  escapechar=\%,
+  numbers=left, % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,
+}
+\newcommandx{\EventBinputlisting}[2][1=]{%
+  \begin{mdframed}[backgroundcolor=yellow!10, rightline=false,leftline=false]
+    \lstinputlisting[language=Event-B,mathescape,frame={},#1]{#2}
+  \end{mdframed}
+}
+%%%%% END Typesetting of the Event-B Language %%%%%
+\newcommand{\eventB}{Event-B\xspace}
+\endinput
+%%
+%% End of file `lstEventB.sty'.

@@ -29,7 +29,7 @@
 % \iffalse
 %<lstEventB>\NeedsTeXFormat{LaTeX2e}\relax
 %<lstEventB>\ProvidesPackage{lstEventB}
-%<lstEventB>    [2017/06/06 v0.1 Package for listing Event-B code] 
+%<lstEventB>    [2017/08/10 v0.1 Package for listing Event-B code] 
 % 
 %<*driver> 
 \documentclass[a4paper]{ltxdoc}
@@ -64,7 +64,7 @@
 % Right brace   \}     Tilde         \~}
 % 
 % 
-% \changes{v0.0}{2016/06/06}{Initial version}
+% \changes{v0.1}{2016/08/10}{Initial version}
 % 
 % \GetFileInfo{lstEventB.sty}
 % 
@@ -91,7 +91,7 @@
 %
 % \title{The \textsf{lstEventB} package\thanks{This document
 % corresponds to \textsf{lstEventB}~\fileversion, dated~\filedate.}}
-% \author{Thai Son Hoang \\ ECS, University of Southampton \\ \texttt{<T dot S dot Hoang at ecs dot
+% \author{Thai Son Hoang and Chenyang Zhu\\ ECS, University of Southampton \\ \texttt{<\{T dot S dot Hoang, C dot Zhu\} at ecs dot
 % soton dot ac dot uk>}}
 % \date{June 6, 2017}
 % 
@@ -99,7 +99,7 @@
 % 
 % ^^A %%%%% Abstract %%%%%
 % \begin{abstract}
-%   This package provides macros for typesetting Event-B code.  It
+%   This package provides macros for listing Event-B code.  It
 %   was developed at the University of Southampton.
 % \end{abstract}
 % 
@@ -116,13 +116,12 @@
 % \section{Usage}
 % 
 % Just like any other package, you need to request this package with a
-% |\usepackage| command in the preamble.
-%
-% So in the simpler case, one just types
+% |\usepackage| command in the preamble.  So in the simpler case
+% (i.e., without any options), one just types
 % 
 % \indent |\usepackage{lstEventB}|
 %
-% \noindent to load the package  
+% \noindent to load the package.
 % 
 % \StopEventually{
 % \PrintChanges
@@ -133,8 +132,10 @@
 % \section{Implementation}
 %
 % ^^A %%% Package loading %%% 
-% The implementation is quite straightforward.  Our implementation is
-% based on the |listings| package.
+% Our implementation is based on the |listings| package.
+% Additionally, we also require |xspace| for spacing, |xcolor| for
+% colouring, |bsymb| for typesetting \eventB mathematical symbols, and
+% |xargs| for defining commands with argument lists.
 % 
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
 %<lstEventB>
@@ -144,7 +145,9 @@
 %    \begin{macrocode}
 \RequirePackage{listings}
 \RequirePackage{xspace}
-\RequirePackage{nomencl}
+\RequirePackage{xcolor}
+\RequirePackage{bsymb}
+\RequirePackage{xargs}
 %    \end{macrocode}
 %
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
@@ -152,156 +155,293 @@
 %<lstEventB>
 % \fi ^^A END Produce comments only in the resulting style file
 %
-% \begin{macro}{\newabbrev}
-%   \changes{v1.0}{2013/04/22}{Macro created}
-%   The |newabbrev| makes use of the worker macro |newfullabbrev| for
-%   creating abbreviations macros.
-% 
-% \iffalse^^A BEGIN Produce comments only in the resulting style file
-%<*lstEventB>
-
-% Meta-macro to create abbreviation macros.
+% \subsection{Package Options}
+% \label{sec:options}
 %
-% Arguments:
-% 1. (Optional) String to be used as macro
-% 2. The abbreviation (also used as the macro if the optional argument
-%    is empty)
-% 3. The full string expansion.
+% We define some options for customising the listing of \eventB code.
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>%%%%% BEGIN Declaration of options %%%%%
+%<lstEventB>% ========================
+%<lstEventB>
+% \fi ^^A END Produce comments only in the resulting style file
 %
-% Usage:
-% - \newabbrev{SME}{Small and Medium-sized Enterprise} will create
-% macros \SME will expand as Small and Medium-sized Enterprise (SME)
-% and \SMEs will expand as Small and Medium-sized Enterprises (SMEs).
-% - \newabbrev[randd]{R\&D}{Research and Development} will create
-% macros \randd will expand as Research and Development (R\&D)
-% and \randds will expand as Research and Developments (R\&Ds).
-%</lstEventB>
-% \fi^^A END Produce comments only in the resulting style file
+%
+% \subsubsection{Colouring option}
+% \label{sec:colour-option}
+% We first declare some internal macros that can be updated when
+% accordingly to the option for colouring.
+%
+% \begin{macro}{EventB@SetKeywordColour}
+%   Command |EventB@SetKeywordColour| is used to set the colour of the
+%   \eventB keywords, by default, it is set to |black|.
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>% Macro to set the colour of the Event-B keywords.
+%<lstEventB>% The default colour is black.
+% \fi ^^A END Produce comments only in the resulting style file
 %    \begin{macrocode}
-\newcommand{\B@font}{\sffamily}
-\newcommand{\setBfont}[1]{%
-  \renewcommand{\B@font}{#1}%
+\newcommand{\EventB@SetKeywordColour}[1]{%
+  \colorlet{EventB@keywordcolour}{#1}%
 }
-
-\lstMakeShortInline[language=EventB, breaklines=f, basicstyle=\B@font\normal]|
-\lst@definelanguage{EventB}{
-  basicstyle=\B@font\scriptsize,
-  keywords={
-    context,sets,constants,axioms, do, od,%
-    machine,sees,refines,variables,invariants,events,with,extended,theorem,%
-    begin,then,end,when,any,where,theory,types,operators,for,prefix,infix,imports,
-    associative,commutative
-  },
-  keywordstyle=\color{red}\bfseries,
-  identifierstyle=\color{orange},
+\EventB@SetKeywordColour{black}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{EventB@SetNdKeywordColour}
+%   Command |EventB@SetNdKeywordColour| is used to set the colour of the
+%   secondary \eventB keywords, by default, it is set to |black|.
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>
+%<lstEventB>% Macro to set the colour of the Event-B secondary keywords.
+%<lstEventB>% The default colour is black.
+% \fi ^^A END Produce comments only in the resulting style file
+%    \begin{macrocode}
+\newcommand{\EventB@SetNdKeywordColour}[1]{%
+  \colorlet{EventB@ndkeywordcolour}{#1}%
+}
+\EventB@SetNdKeywordColour{black}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{EventB@SetIdentifierColour}
+%   Command |EventB@SetIdentifierColour| is used to set the colour of
+%   \eventB identifiers, by default, it is set to |black|.
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>
+%<lstEventB>% Macro to set the colour of Event-B identifiers.
+%<lstEventB>% The default colour is black.
+% \fi ^^A END Produce comments only in the resulting style file
+%    \begin{macrocode}
+\newcommand{\EventB@SetIdentifierColour}[1]{%
+  \colorlet{EventB@identifiercolour}{#1}%
+}
+\EventB@SetIdentifierColour{black}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{EventB@SetCommentColour}
+%   Command |EventB@SetCommentColour| is used to set the colour of
+%   \eventB comments, by default, it is set to |black|.
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>
+%<lstEventB>% Macro to set the colour of Event-B comments.
+%<lstEventB>% The default colour is black.
+% \fi ^^A END Produce comments only in the resulting style file
+%    \begin{macrocode}
+\newcommand{\EventB@SetCommentColour}[1]{%
+  \colorlet{EventB@commentcolour}{#1}%
+}
+\EventB@SetCommentColour{black}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{EventB@SetFormulaColour}
+%   Command |EventB@SetFormulaColour| is used to set the colour of
+%   \eventB formulae, by default, it is set to |black|.
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>
+%<lstEventB>% Macro to set the colour of Event-B formulae.
+%<lstEventB>% The default colour is black.
+% \fi ^^A END Produce comments only in the resulting style file
+%    \begin{macrocode}
+\newcommand{\EventB@SetFormulaColour}[1]{%
+  \colorlet{EventB@formulacolour}{#1}%
+}
+\EventB@SetFormulaColour{black}
+%    \end{macrocode}
+% \end{macro}
+%
+% We now define the |colour| option and set the different colours
+% accordingly.  The keywords colour (both first primary and secondary
+% keywords) is |red|.  The identifier colour is |purple|.  The comment
+% colour is |green|.  The formula colour is |blue|.
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>
+%<lstEventB>% Declaration of the *colour* option.
+% \fi ^^A END Produce comments only in the resulting style file
+%    \begin{macrocode}
+\DeclareOption{colour}{
+  \EventB@SetKeywordColour{red}
+  \EventB@SetNdKeywordColour{red}
+  \EventB@SetIdentifierColour{purple}
+  \EventB@SetCommentColour{green}
+  \EventB@SetFormulaColour{blue}
+}
+%    \end{macrocode}
+% Additionally, we define the |color| option as an alias of |colour|.
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>
+%<lstEventB>% Declaration of the *color* option as an alias of *colour*.
+% \fi ^^A END Produce comments only in the resulting style file
+%    \begin{macrocode}
+\DeclareOption{color}{
+  \ExecuteOptions{colour}
+}
+%    \end{macrocode}
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>%%%%% END Declaration of options %%%%%
+%<lstEventB>
+% \fi ^^A END Produce comments only in the resulting style file
+%
+%
+% \subsubsection{Execution of options}
+% \label{sec:options-execution}
+%
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>%%%%% BEGIN Execution of options %%%%%
+%<lstEventB>% ========================
+%<lstEventB>
+% \fi ^^A END Produce comments only in the resulting style file
+%    \begin{macrocode}
+\ProcessOptions
+%    \end{macrocode}
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>%%%%% END Execution of options %%%%%
+% \fi ^^A END Produce comments only in the resulting style file
+%
+% \subsection{Typesetting of the Event-B language}
+% \label{sec:eventb-language}
+% In this section, we define how to typesetting \eventB code.  
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>%%%%% BEGIN Typesetting of the Event-B Language %%%%%
+%<lstEventB>% ===================================
+%<lstEventB>
+% \fi ^^A END Produce comments only in the resulting style file
+%
+% \subsubsection{Defining the Event-B language}
+%\label{sec:define-eventb}
+%
+% We first define the \eventB language using |lstdefinelanguage|.
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>% Defining the Event-B language
+% \fi ^^A END Produce comments only in the resulting style file
+%    \begin{macrocode}
+\lstdefinelanguage{Event-B}{%
+  basicstyle=\rmfamily\footnotesize,
+%    \end{macrocode}
+% Subsequently, we define the keywords of \eventB and how to typeset
+% them.  Note that the keywords are insensitive.
+%    \begin{macrocode}
+  keywords={%
+    % Keywords for contexts
+    context,extends,sets,constants,axioms,theorem,end,%
+    % Keywords for machines
+    machine,sees,refines,variables,invariants,variant,events,%
+  },%
+  keywordstyle=\color{EventB@keywordcolour}\bf\sffamily,%
   sensitive=false,
-  comment=[l]{//},
-  morecomment=[s]{/*}{*/},
-  commentstyle=\color{purple}\ttfamily,
-  stringstyle=\color{blue}\ttfamily,
-  morestring=[b]',
-  morestring=[b]"
+%    \end{macrocode}
+% We also define the secondary keywords of \eventB and how to typeset them.
+%    \begin{macrocode}
+  ndkeywords={%
+    % Keywords for events
+    extended,theorem,any,where,when,with,begin,then%
+  },%
+  ndkeywordstyle=\color{EventB@ndkeywordcolour}\bf\sffamily,%
+%    \end{macrocode}
+% Next, we define how to typeset \eventB identifiers.
+%    \begin{macrocode}
+  identifierstyle=\color{EventB@identifiercolour}\sffamily,
+%    \end{macrocode}
+% We define how comments are typeset.
+%    \begin{macrocode}
+  comment=[l]{//},%
+  morecomment=[s]{/*}{*/},%
+  commentstyle=\color{EventB@commentcolour}\rmfamily,%
+%    \end{macrocode}
+% Furthermore, we define the appearance of formulae (which are typeset strings).
+%    \begin{macrocode}
+  stringstyle=\color{EventB@formulacolour}\sffamily,
+  string=[b]",
+  showstringspaces=false, % Do not show the space in formulae
+%    \end{macrocode}
+% Finally, we define the \eventB mathematical symbols using the |bsymb| package
+% as follows.
+%    \begin{macrocode}
+  inputencoding=utf8, % Allow UTF-8 input encoding
+  extendedchars=true, % Use extended characters
+  literate= % Event-B mathematical symbols
+  {≔}{{$\bcmeq$}{ }}2%
+  {⊆}{{$\subseteq$}}1%
+  {≠}{{$\neq$}}1%
+  {∀}{{$\forall$}}1%
+  {·}{{$\qdot$}}1%
+  {∈}{{$\in$}{ }}2%
+  {⇒}{{$\limp$}}1%
+  {∧}{{$\land$}}1%
+  {∅}{{$\emptyset$}}1%
+  {→}{{$\tfun$}}1%
+  {∖}{{$\setminus$}}1%
+  {⩤}{{$\domsub$}}1%
+  {⊥}{{$\bfalse$}}1%
+  {∩}{{$\binter$}}1%
+  {∪}{{$\bunion$}}1%
+  {⇔}{{$\leqv$}}1%
+  {⇸}{{$\pfun$}}1%
+  {∼}{{$\sim$}}1%
+  {↦}{{$\mapsto$ }}1%
+  {∉}{{$\notin$ }}1%
+  {ℕ}{{$\nat$}}1%
+  , % End of Event-B mathematical symbols
 }
-
-\lstset{
-  columns=fullflexible,
-  numberbychapter=false,
-  frame=top,frame=bottom,
-  basicstyle=\ttfamily\scriptsize,    % the size of the fonts that are used for the code
-  stepnumber=1,                           % the step between two line-numbers. If it is 1 each line will be numbered
+%    \end{macrocode}
+%
+% \subsubsection{Typesetting Event-B Code}
+% \label{sec:eventb-inline}
+% We first create a short inline Event-B code with \verb$|$ using
+% |lstMakeShortInline| command.
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>
+%<lstEventB>% Type setting inline Event-B code using |
+% \fi ^^A END Produce comments only in the resulting style file
+%    \begin{macrocode}
+\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]|
+%    \end{macrocode}
+% We then create a dedicated |EventBcode| environment using |lstnewenvironment|.
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>
+%<lstEventB>% Multi-line Event-B code should be wrapped in EventBcode environment.
+% \fi ^^A END Produce comments only in the resulting style file
+%    \begin{macrocode}
+\lstnewenvironment{EventBcode}{\lstset{language=Event-B}}{}
+%    \end{macrocode}
+% Finally, we set some appearance parameters for display the code.
+%    \begin{macrocode}
+\lstset{%
+  columns=fullflexible, % The columns are fully flexible.
+  numberbychapter=false, 
+  frame=top,frame=bottom, % There are line (frame at top and bottom).
+  stepnumber=1, % the step between two line-numbers. If it is 1 each line will be numbered
   numberstyle=\tiny,
-  numbersep=5pt,                         % how far the line-numbers are from the code
-  tabsize=2,                              % tab size in blank spaces
-  extendedchars=true,                     %
-  breaklines=true,                        % sets automatic line breaking
-  captionpos=b,                           % sets the caption-position to top
+  numbersep=5pt, % how far the line-numbers are from the code
+  tabsize=2, % tab size in blank spaces
+  breaklines=true, % sets automatic line breaking
+  captionpos=b, % sets the caption-position to top
   mathescape=false,
-  stringstyle=\color{black}\ttfamily, % Farbe der String
-  keywordstyle=\color{black}\ttfamily, % Farbe der String
-  showspaces=false,           % Leerzeichen anzeigen ?
-  showtabs=false,             % Tabs anzeigen ?
+  showspaces=false, % Do not show spaces
+  showtabs=false, % Do not show tabs
   xleftmargin=10pt,
   framexleftmargin=10pt,
   framexrightmargin=0pt,
   framexbottommargin=5pt,
   framextopmargin=5pt,
-  showstringspaces=false,      % Leerzeichen in Strings anzeigen ?
   escapechar=\%,
-  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbers=left, % where to put the line-numbers; possible values are (none, left, right)
   numbersep=5pt,
-  inputencoding=utf8,         % UTF-8 input encoding
-  extendedchars=true,         % Use extended characters
-  literate=
-  {⩥}{{$\ransub$}}1
-  {▷}{{$\ranres$}}1
-  {∩}{{$\binter$ }}1
-  {∪}{{$\bunion$ }}1
-  {↦}{{$\mapsto$ }}1
-  {→}{{$\tfun$ }}1
-  {⊈}{{$\nsubset$}}1
-  {⊄}{{$\nsubseteq$}}1
-  {∉}{{$\notin$ }}1
-  {⇔}{{$\leqv$}}1
-  {⇒}{{$\limp$}}1
-  {∧}{{$\land$}}1
-  {∀}{{$\forall$ }}1
-  {}{{$\ovl$ }}1 
-  {≠}{{$\neq$ }}1 
-  {≤}{{$\leq$ }}1 
-  {≥}{{$\geq$ }}1 
-  {⊂}{{$\subset$ }}1 
-  {⊆}{{$\subseteq$ }}1
-  {↔}{{$\rel$ }}1
-  {⤖}{{$\tbij$ }}1
-  {⇸}{{$\pfun$ }}1
-  {⤔}{{$\pinj$ }}1
-  {↣}{{$\tinj$ }}1
-  {⤀}{{$\psur$ }}1
-  {↠}{{$\tsur$ }}1
-  {∅}{{$\emptyset$ }}1
-  {∖}{{$\setminus$ }}1
-  {×}{{$\cprod$ }}1 
-  {⊗}{{$\dprod$ }}1
-  {∼}{{$\sim$}}1
-  {⩤}{{$\domsub$ }}1
-  {◁}{{$\domres$ }}1
-  {λ}{{$\lambda$ }}1
-  {‥}{{$\upto$ }}1
-  {·}{{$\qdot$ }}1
-  {^}{{$\hat$ }}1
-  {≔}{{$\bcmeq$ }}1
-  {:∈}{{$\bcmin$ }}1
-  {:∣}{{$\bcmsuch$ }}1
-  {∈}{{$\in$ }}1
-  {↦}{{$\mapsto$ }}1
-  {ℕ1}{{$\natn$ }}1 
-  {ℕ}{{$\nat$ }}1
-  {ℙ1}{{$\pown$ }}1 
-  {ℙ}{{$\pow$ }}1 
-  {ℤ}{{$\intg$ }}1 
-  {⋂}{{$\Inter$ }}1 
-  {⋃}{{$\Union$ }}1 
-  {∨}{{$\lor$ }}1 
-  {⊤}{{$\btrue$ }}1 
-  {⊥}{{$\bfalse$ }}1
-  {∘}{{$\circ$ }}1
-  {⦂}{{$\oftype$ }}1  
-  {∣}{{$\mid$ }}1 
-  {+}{{$+$ }}1 
-  {−}{{$-$ }}1 
-  {*}{{$*$ }}1 
-  {÷}{{$/$ }}1 
-  {ℝ}{{$\mathbb{R}$ }}1 
-  {prj1}{{$\prjone$ }}1 
-  {prj2}{{$\prjtwo$ }}1 
-  {==}{{$\widehat{=}$ }}1 
-  {¬}{{$\neg$ }}1 
-, % Special symbols
- }
-
+}
 %    \end{macrocode}
-% \end{macro} ^^A \newabbrev
-%
+%    \begin{macrocode}
+\newcommandx{\EventBinputlisting}[2][1=]{%
+  \begin{mdframed}[backgroundcolor=yellow!10, rightline=false,leftline=false]
+    \lstinputlisting[language=Event-B,mathescape,frame={},#1]{#2}
+  \end{mdframed}
+}
+%    \end{macrocode}
+% \iffalse ^^A BEGIN Produce comments only in the resulting style file
+%<lstEventB>%%%%% END Typesetting of the Event-B Language %%%%%
+% \fi ^^A END Produce comments only in the resulting style file
+%    \begin{macrocode}
+\newcommand{\eventB}{Event-B\xspace}
+%    \end{macrocode}
 %
 % \Finale
 \endinput
