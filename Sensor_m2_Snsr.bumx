@@ -1,0 +1,61 @@
+machine Sensor_m2_Snsr
+refines Sensor_m1_DEP
+
+variables
+
+	SNSR
+
+	DEP
+
+	Snsr_01
+
+	Snsr_10
+
+invariants
+
+	@inv1_1: "Snsr_01 = TRUE ⇒ SNSR = TRUE"
+
+	@inv1_2: "Snsr_10 = TRUE ⇒ SNSR = FALSE"
+
+	@inv1_3: "Snsr_01 = FALSE ∨ Snsr_10 = FALSE"
+
+events
+
+	INITIALISATION extended
+	refines INITIALISATION
+	begin
+		@act3: "Snsr_01 ≔ FALSE"
+		@act4: "Snsr_10 ≔ FALSE"
+	end
+
+	SNSR_on extended
+	refines SNSR_on
+	when
+		@grd2: "Snsr_10 = FALSE"
+	then
+		@act2: "Snsr_01 ≔ TRUE"
+	end
+
+	SNSR_off extended
+	refines SNSR_off
+	when
+		@grd2: "Snsr_01 = FALSE"
+	then
+		@act3: "Snsr_10 ≔ TRUE"
+	end
+
+	ctrl_Senses_Snsr_01
+	when
+		@grd1: "Snsr_01 = TRUE"
+	then
+		@act1: "Snsr_01 ≔ FALSE"
+	end
+
+	ctrl_Senses_Snsr_10
+	when
+		@grd1: "Snsr_10 = TRUE"
+	then
+		@act1: "Snsr_10 ≔ FALSE"
+	end
+
+end

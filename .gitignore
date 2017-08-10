@@ -5,5 +5,6 @@
 *.idx
 *.ind
 *.log
+*.rel
 *.synctex.gz
 *.toc

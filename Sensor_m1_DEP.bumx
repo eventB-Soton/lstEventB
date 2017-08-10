@@ -1,0 +1,25 @@
+machine Sensor_m1_DEP
+refines Sensor_m0_SNSR
+variables
+	SNSR
+	DEP
+invariants
+	@inv0_1: "DEP ∈ ℕ"
+events
+
+	INITIALISATION extended
+	begin
+		@act2: "DEP ≔ 0"
+	end
+
+	SNSR_on extended
+	refines SNSR_on
+	end
+
+	SNSR_off extended
+	refines SNSR_off
+	begin
+		@act2: "DEP ≔ DEP + 1"
+	end
+
+end
