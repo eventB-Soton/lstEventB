@@ -18,8 +18,7 @@ sample-lstEventB-colour.pdf: sample-lstEventB-colour.tex sample-main.tex lstEven
 	pdflatex sample-lstEventB-colour.tex
 
 clean:
-	rm -f *.aux lstEventB.glo lstEventB.gls lstEventB.idx lstEventB.ilg lstEventB.ind *.log lstEventB.toc
+	rm -f *.aux lstEventB.glo lstEventB.gls lstEventB.idx lstEventB.ilg lstEventB.ind *.log *.rel *.synctex.gz lstEventB.toc
 
 cleanall: clean
 	rm -f lstEventB.pdf lstEventB.sty sample-lstEventB.pdf sample-lstEventB-colour.pdf
-
