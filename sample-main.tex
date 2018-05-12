@@ -5,11 +5,11 @@
 
 \begin{document}
 \maketitle
-For convenient, we define macro \verb|\eventB| for \eventB. 
+For convenient, we define macro \verb|\EventB| for \EventB. 
 
-We start first with some inline \eventB code by embedding them using a pair of \verb$|$, for example \verb$|@grd1: "SNSR = FALSE"|$ gives |@grd1: "SNSR = FALSE"|. Any \eventB formulae including Unicode symbols will be typeset using the \verb|bsymb| package accordingly.
+We start first with some inline \EventB code by embedding them using a pair of \verb$|$, for example \verb$|@grd1: "SNSR = FALSE"|$ gives |@grd1: "SNSR = FALSE"|. Any \EventB formulae including Unicode symbols will be typeset using the \verb|bsymb| package accordingly.
 
-More complete piece of code (including the Unicode symbols) can be typeset using the \verb|EventBcode| environment. Below is the typesetting of an \eventB machine.
+More complete piece of code (including the Unicode symbols) can be typeset using the \verb|EventBcode| environment. Below is the typesetting of an \EventB machine.
 \begin{EventBcode}
 machine Sensor_m0_SNSR
 variables
@@ -49,7 +49,7 @@ invariants
 	@thm0_1: "SNSR ∈ BOOL" theorem
 \end{EventBcode}
 
-One can includes external file containing \eventB code using the \verb|\EventBinputlisting| command.  For example the following is the result of including the code in the file \verb|Sensor_m1_DEP.bumx| using \verb|\EventBinputlisting{Sensor_m1_DEP.bumx}|.
+One can includes external file containing \EventB code using the \verb|\EventBinputlisting| command.  For example the following is the result of including the code in the file \verb|Sensor_m1_DEP.bumx| using \verb|\EventBinputlisting{Sensor_m1_DEP.bumx}|.
 \EventBinputlisting{Sensor_m1_DEP.bumx}
 
 More specifically, one can specify more details on the inclusion, e.g., the ranges, as the following example\\

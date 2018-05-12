@@ -136,7 +136,7 @@
 % ^^A %%% Package loading %%% 
 % Our implementation is based on the |listings| package.
 % Additionally, we also require |xspace| for spacing, |xcolor| for
-% colouring, |bsymb| for typesetting \eventB mathematical symbols, and
+% colouring, |bsymb| for typesetting \EventB mathematical symbols, and
 % |xargs| for defining commands with argument lists.
 % 
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
@@ -160,7 +160,7 @@
 % \subsection{Package Options}
 % \label{sec:options}
 %
-% We define some options for customising the listing of \eventB code.
+% We define some options for customising the listing of \EventB code.
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
 %<lstEventB>%%%%% BEGIN Declaration of options %%%%%
 %<lstEventB>% ========================
@@ -175,7 +175,7 @@
 %
 % \begin{macro}{EventB@SetKeywordColour}
 %   Command |EventB@SetKeywordColour| is used to set the colour of the
-%   \eventB keywords, by default, it is set to |black|.
+%   \EventB keywords, by default, it is set to |black|.
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
 %<lstEventB>% Macro to set the colour of the Event-B keywords.
 %<lstEventB>% The default colour is black.
@@ -190,7 +190,7 @@
 %
 % \begin{macro}{EventB@SetNdKeywordColour}
 %   Command |EventB@SetNdKeywordColour| is used to set the colour of the
-%   secondary \eventB keywords, by default, it is set to |black|.
+%   secondary \EventB keywords, by default, it is set to |black|.
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
 %<lstEventB>
 %<lstEventB>% Macro to set the colour of the Event-B secondary keywords.
@@ -206,7 +206,7 @@
 %
 % \begin{macro}{EventB@SetIdentifierColour}
 %   Command |EventB@SetIdentifierColour| is used to set the colour of
-%   \eventB identifiers, by default, it is set to |black|.
+%   \EventB identifiers, by default, it is set to |black|.
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
 %<lstEventB>
 %<lstEventB>% Macro to set the colour of Event-B identifiers.
@@ -222,7 +222,7 @@
 %
 % \begin{macro}{EventB@SetCommentColour}
 %   Command |EventB@SetCommentColour| is used to set the colour of
-%   \eventB comments, by default, it is set to |black|.
+%   \EventB comments, by default, it is set to |black|.
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
 %<lstEventB>
 %<lstEventB>% Macro to set the colour of Event-B comments.
@@ -238,7 +238,7 @@
 %
 % \begin{macro}{EventB@SetFormulaColour}
 %   Command |EventB@SetFormulaColour| is used to set the colour of
-%   \eventB formulae, by default, it is set to |black|.
+%   \EventB formulae, by default, it is set to |black|.
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
 %<lstEventB>
 %<lstEventB>% Macro to set the colour of Event-B formulae.
@@ -302,7 +302,7 @@
 %
 % \subsection{Typesetting of the Event-B language}
 % \label{sec:eventb-language}
-% In this section, we define how to typesetting \eventB code.  
+% In this section, we define how to typesetting \EventB code.  
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
 %<lstEventB>%%%%% BEGIN Typesetting of the Event-B Language %%%%%
 %<lstEventB>% ===================================
@@ -312,7 +312,7 @@
 % \subsubsection{Defining the Event-B language}
 %\label{sec:define-eventb}
 %
-% We first define the \eventB language using |lstdefinelanguage|.
+% We first define the \EventB language using |lstdefinelanguage|.
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
 %<lstEventB>% Defining the Event-B language
 % \fi ^^A END Produce comments only in the resulting style file
@@ -320,7 +320,7 @@
 \lstdefinelanguage{Event-B}{%
   basicstyle=\rmfamily\footnotesize,
 %    \end{macrocode}
-% Subsequently, we define the keywords of \eventB and how to typeset
+% Subsequently, we define the keywords of \EventB and how to typeset
 % them.  Note that the keywords are insensitive.
 %    \begin{macrocode}
   keywords={%
@@ -332,7 +332,7 @@
   keywordstyle=\color{EventB@keywordcolour}\bfseries\sffamily,%
   sensitive=false,
 %    \end{macrocode}
-% We also define the secondary keywords of \eventB and how to typeset them.
+% We also define the secondary keywords of \EventB and how to typeset them.
 %    \begin{macrocode}
   ndkeywords={%
     % Keywords for events
@@ -340,7 +340,7 @@
   },%
   ndkeywordstyle=\color{EventB@ndkeywordcolour}\bfseries\sffamily,%
 %    \end{macrocode}
-% Next, we define how to typeset \eventB identifiers.
+% Next, we define how to typeset \EventB identifiers.
 %    \begin{macrocode}
   identifierstyle=\color{EventB@identifiercolour}\sffamily,
 %    \end{macrocode}
@@ -356,7 +356,7 @@
   string=[b]",
   showstringspaces=false, % Do not show the space in formulae
 %    \end{macrocode}
-% Finally, we define the \eventB mathematical symbols using the |bsymb| package
+% Finally, we define the \EventB mathematical symbols using the |bsymb| package
 % as follows.
 %    \begin{macrocode}
   inputencoding=utf8, % Allow UTF-8 input encoding
@@ -482,7 +482,7 @@
 %    \end{macrocode}
 % \end{macro}
 %    \begin{macrocode}
-\newcommand{\eventB}{Event-B\xspace}
+\newcommand{\EventB}{Event-B\xspace}
 %    \end{macrocode}
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
 %<lstEventB>%%%%% BEGIN Public commands %%%%%
