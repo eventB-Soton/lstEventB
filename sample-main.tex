@@ -40,6 +40,15 @@ events
 end
 \end{EventBcode}
 
+One can change the different colour options.  For example, \verb|\EventBSetKeywordColour{blue!50!black}| will change the keyword colour to dark blue. (This has effects only when 
+\begin{EventBcode}
+machine Sensor_m0_SNSR
+variables
+	SNSR
+invariants
+	@thm0_1: "SNSR ∈ BOOL" theorem
+\end{EventBcode}
+
 One can includes external file containing \eventB code using the \verb|\EventBinputlisting| command.  For example the following is the result of including the code in the file \verb|Sensor_m1_DEP.bumx| using \verb|\EventBinputlisting{Sensor_m1_DEP.bumx}|.
 \EventBinputlisting{Sensor_m1_DEP.bumx}
 
