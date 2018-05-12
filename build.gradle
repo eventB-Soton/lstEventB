@@ -1,0 +1,132 @@
+/**
+ * Copyright (C) 2018 Thai Son Hoang
+ * Gradle script for building LaTeX package.
+ *
+ * Contributors
+ *   Thai Son Hoang - Initial API and implementation.
+ */
+
+defaultTasks 'build'
+
+/**
+ * Extra Properties:
+ * - The base name for the main LaTeX file
+ * - The LaTeX Program
+ */
+ext {
+  BASENAME = 'lstEventB'
+  LATEX = 'pdflatex'
+  BIBTEX = 'bibtex'
+  MAKEINDEX = 'makeindex'
+}
+
+/* The project */
+project.ext {
+  DTXFile = BASENAME + '.dtx'
+  INSFile = BASENAME + '.ins'
+  TEXFile = BASENAME + '.tex'
+  AUXFile = BASENAME + '.aux'
+  BBLFile = BASENAME + '.bbl'
+  PDFFile = BASENAME + '.pdf'
+  STYFile = BASENAME + '.sty'
+  GLOFile = BASENAME + '.glo'
+  GLSFile = BASENAME + '.gls'
+  IDXFile = BASENAME + '.idx'
+  INDFile = BASENAME + '.ind'
+  SAMPLE_FILES = ['sample-lstEventB', 'sample-lstEventB-colour']
+  SAMPLE_PREFIX = 'sample'
+  SAMPLE_DELETE_PREFIX = 'deleteSample'
+}
+
+task sty(type: Exec) {
+  inputs.files INSFile, DTXFile
+  outputs.file STYFile
+
+  doFirst {
+    deleteSTYFile()
+  }
+  
+  commandLine LATEX, "$project.INSFile"
+}
+
+void deleteSTYFile() {
+  exec {
+    commandLine 'rm', '-f', "$project.STYFile"
+  }
+}
+
+
+task pdf() {
+  dependsOn sty
+  inputs.files DTXFile, STYFile
+  outputs.file PDFFile
+  doLast{
+    pdf_steps()
+  }
+}
+
+void pdf_steps() {
+  exec {
+    commandLine LATEX, "$project.DTXFile"
+  }
+  exec {
+    commandLine MAKEINDEX, '-s', 'gglo.ist', '-o', "$project.GLSFile", "$project.GLOFile"
+  }
+  exec {
+    commandLine MAKEINDEX, '-s', 'gglo.ist', '-o', "$project.INDFile", "$project.IDXFile"
+  }
+  exec {
+    commandLine LATEX, "$project.DTXFile"
+  }
+  exec {
+    commandLine LATEX, "$project.DTXFile"
+  }
+}
+
+SAMPLE_FILES.each { def sampleFile -> 
+  task "$SAMPLE_PREFIX$sampleFile"() {
+    inputs.files STYFile, sampleFile+".tex", 'sample-main.tex'
+    outputs.file sampleFile+".pdf"
+    doLast{
+      sample_steps(sampleFile)
+    }
+  }
+}
+
+void sample_steps(sampleFile) {
+  exec {
+    commandLine LATEX, sampleFile
+  }
+  exec {
+    commandLine LATEX, sampleFile
+  }
+}
+
+task clean(type: Delete) {
+  delete fileTree('.').include('**/*.aux'), fileTree('.').include('**/*.glo'), fileTree('.').include('**/*.gls'), fileTree('.').include('**/*.idx'), fileTree('.').include('**/*.ilg'), fileTree('.').include('**/*.ind'), fileTree('.').include('**/*.log'), fileTree('.').include('**/*.out'), fileTree('.').include('**/*.toc')
+}
+
+task cleanall(type: Delete) {
+  dependsOn clean
+  delete PDFFile, STYFile
+  dependsOn tasks.matching {
+    Task task -> task.name.startsWith(SAMPLE_DELETE_PREFIX)
+  }
+}
+
+SAMPLE_FILES.each {def sampleFile ->
+  task "$SAMPLE_DELETE_PREFIX$sampleFile"(type: Delete) {
+    delete sampleFile+".pdf"
+  }
+}
+
+task build {
+  dependsOn 'pdf'
+  dependsOn tasks.matching {
+    Task task -> task.name.startsWith(SAMPLE_PREFIX)
+  }
+}
+
+task all {
+  dependsOn 'build', 'clean'
+}
