@@ -489,7 +489,7 @@
   {/<<:}{{$\not\subset$}}1% Not a proper subset
   {<<:}{{$\subset$}}1% Proper subset
   {<:}{{$\subseteq$}}1% Subset
-  {:}{{$\in$}}1% Set membership
+  {!:}{{$\in$}}1% Set membership
   % ASCII Numbers
   {!INT}{{$\intg$}}1% Set of integer numbers
   {!INTER}{{$\Inter$}}1% Quantified intersection (This is moved here from ASCII Sets)
@@ -530,14 +530,14 @@
 %
 % \subsubsection{Typesetting Event-B Code}
 % \label{sec:eventb-inline}
-% We first create a short inline Event-B code with \verb|$| using
+% We first create a short inline Event-B code with \verb$|$ using
 % |lstMakeShortInline| command.
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
 %<lstEventB>
-%<lstEventB>% Type setting inline Event-B code using $
+%<lstEventB>% Type setting inline Event-B code using |
 % \fi ^^A END Produce comments only in the resulting style file
 %    \begin{macrocode}
-\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]$
+\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]|
 %    \end{macrocode}
 % We then create a dedicated |EventBcode| environment using |lstnewenvironment|.
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
@@ -554,9 +554,12 @@
 %<lstEventB>% Multi-line Event-B code should be wrapped in EventBcode environment.
 % \fi ^^A END Produce comments only in the resulting style file
 %    \begin{macrocode}
-\newenvironment{EventBNoInline}
-{\lstDeleteShortInline$}
-{\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]$}
+\newenvironment{EventBNoShortInline}
+{
+  \lstDeleteShortInline|
+  \lstset{language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize}
+}
+{\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]|}
 %    \end{macrocode}
 %
 % Finally, we set some appearance parameters for display the code.

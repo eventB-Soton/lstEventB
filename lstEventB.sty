@@ -251,7 +251,7 @@
   {/<<:}{{$\not\subset$}}1% Not a proper subset
   {<<:}{{$\subset$}}1% Proper subset
   {<:}{{$\subseteq$}}1% Subset
-  {:}{{$\in$}}1% Set membership
+  {!:}{{$\in$}}1% Set membership
   % ASCII Numbers
   {!INT}{{$\intg$}}1% Set of integer numbers
   {!INTER}{{$\Inter$}}1% Quantified intersection (This is moved here from ASCII Sets)
@@ -289,16 +289,19 @@
   , % End of Event-B mathematical symbols
 }
 
-% Type setting inline Event-B code using $
-\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]$
+% Type setting inline Event-B code using |
+\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]|
 
 % Multi-line Event-B code should be wrapped in EventBcode environment.
 \lstnewenvironment{EventBcode}{\lstset{language=Event-B}}{}
 
 % Multi-line Event-B code should be wrapped in EventBcode environment.
-\newenvironment{EventBNoInline}
-{\lstDeleteShortInline$}
-{\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]$}
+\newenvironment{EventBNoShortInline}
+{
+  \lstDeleteShortInline|
+  \lstset{language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize}
+}
+{\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]|}
 \lstset{%
   columns=fullflexible, % The columns are fully flexible.
   numberbychapter=false,

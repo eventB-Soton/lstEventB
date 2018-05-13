@@ -7,189 +7,191 @@
 \maketitle
 For convenient, we define macro \verb|\EventB| for \EventB. 
 
-We start first with some inline \EventB code by embedding them using a pair of \verb|$|, for example \verb|$@grd1 "SNSR = FALSE"$| gives $@grd1 "SNSR = FALSE"$. Any \EventB formulae including Unicode symbols will be typeset using the \verb|bsymb| package accordingly.
+We start first with some inline \EventB code by embedding them using a pair of \verb$|$, for example \verb$|@grd1: "SNSR = FALSE"|$ gives |@grd1: "SNSR = FALSE"|. Any \EventB formulae including Unicode symbols will be typeset using the \verb|bsymb| package accordingly.
 
-\begin{table}[!htbp]
-  \centering
-  \begin{tabular}{|l|l|l|}
-    \hline
-    ASCII & Symbols & Explanation \\
-    \hline
-    \verb|!false| & $!false$ & False \\
-    \verb|!true| & $!true$ & True \\
-    \verb|&| & $&$ & Conjunction \\
-    \verb|!or| & $!or$ & Disjunction \\
-    \verb|=>| & $=>$ & Implication \\
-    \verb|<=>| & $<=>$ & Equivalence \\
-    \verb|!not| & $!not$ & Negation \\
-    \verb|!| & $!$ & Universal quantification \\
-    \verb|#| & $#$ & Existential quantification \\
-    \verb|.| & $.$ & Quantification dot \\
-    \verb|=| & $=$ & Equality \\
-    \verb|/=| & $/=$ & Inequality \\
-    \hline
-  \end{tabular}
-  \caption{Predicates}
-\end{table}
+\begin{EventBNoShortInline}
+  \begin{table}[!htbp]
+    \centering
+    \begin{tabular}{|l|l|l|}
+      \hline
+      ASCII & Symbols & Explanation \\
+      \hline
+      \verb$!false$ & \lstinline$!false$ & False \\
+      \verb$!true$ & \lstinline$!true$ & True \\
+      \verb$&$ & \lstinline$&$ & Conjunction \\
+      \verb$!or$ & \lstinline$!or$ & Disjunction \\
+      \verb$=>$ & \lstinline$=>$ & Implication \\
+      \verb$<=>$ & \lstinline$<=>$ & Equivalence \\
+      \verb$!not$ & \lstinline$!not$ & Negation \\
+      \verb$!$ & \lstinline$!$ & Universal quantification \\
+      \verb$#$ & \lstinline$#$ & Existential quantification \\
+      \verb$.$ & \lstinline$.$ & Quantification dot \\
+      \verb$=$ & \lstinline$=$ & Equality \\
+      \verb$/=$ & \lstinline$/=$ & Inequality \\
+      \hline
+    \end{tabular}
+    \caption{Predicates}
+  \end{table}
 
-\begin{table}[!htbp]
-  \centering
-  \begin{tabular}{|l|l|l|}
-    \hline
-    ASCII & Symbols & Explanation \\
-    \hline
-    \verb|{}| & ${}$ & Empty set \\
-    \verb$|$ & $|$ & Vertical bar, e.g., in set comprehension \\
-    \verb|\/| & $\/$ & Union \\
-    \verb|/\| & $/\$ & Intersection \\
-    \verb$\$ & $\$ & Set difference \\
-    \verb$|->$ & $|->$ & Ordered pair \\
-    \verb|**| & $**$ & Cartesian product \\
-    \verb|!POW| & $!POW$ & Powerset \\
-    \verb|!POW1| & $!POW1$ & Non-empty subsets \\
-    \verb|!card| & $!card$ & Cardinality \\
-    \verb|!union| & $!union$ & Generalised union \\
-    \verb|!inter| & $!inter$ & Generalised intersection \\
-    \verb|!UNION| & $!UNION$ & Quantified union \\
-    \verb|!INTER| & $!INTER$ & Quantified intersection \\
-    \hline
-  \end{tabular}
-  \caption{Sets}
-\end{table}
- 
-\begin{table}[!htbp]
-  \centering
-  \begin{tabular}{|l|l|l|}
-    \hline
-    ASCII & Symbols & Explanation \\
-    \hline
-    \verb|:| & $:$ & Set membership \\
-    \verb|/:| & $/:$ & Set non-membership \\
-    \verb|<:| & $<:$ & Subset \\
-    \verb|/<:| & $/<:$ & Not a subset \\
-    \verb|<<:| & $<<:$ & Proper subset \\
-    \verb|/<<:| & $/<<:$ & Not a proper subset \\
-    \verb|!finite| & $!finite$ & Finite \\
-    \verb|!partition| & $!partition$ & Partition \\
-    \hline
-  \end{tabular}
-  \caption{Set predicates}
-\end{table}
+  \begin{table}[!htbp]
+    \centering
+    \begin{tabular}{|l|l|l|}
+      \hline
+      ASCII & Symbols & Explanation \\
+      \hline
+      \verb${}$ & \lstinline${}$ & Empty set \\
+      \verb$|$ & \lstinline$|$ & Vertical bar, e.g., in set comprehension \\
+      \verb$\/$ & \lstinline$\/$ & Union \\
+      \verb$/\$ & \lstinline$/\$ & Intersection \\
+      \verb$\$ & \lstinline$\$ & Set difference \\
+      \verb$|->$ & \lstinline$|->$ & Ordered pair \\
+      \verb$**$ & \lstinline$**$ & Cartesian product \\
+      \verb$!POW$ & \lstinline$!POW$ & Powerset \\
+      \verb$!POW1$ & \lstinline$!POW1$ & Non-empty subsets \\
+      \verb$!card$ & \lstinline$!card$ & Cardinality \\
+      \verb$!union$ & \lstinline$!union$ & Generalised union \\
+      \verb$!inter$ & \lstinline$!inter$ & Generalised intersection \\
+      \verb$!UNION$ & \lstinline$!UNION$ & Quantified union \\
+      \verb$!INTER$ & \lstinline$!INTER$ & Quantified intersection \\
+      \hline
+    \end{tabular}
+    \caption{Sets}
+  \end{table}
+  
+  \begin{table}[!htbp]
+    \centering
+    \begin{tabular}{|l|l|l|}
+      \hline
+      ASCII & Symbols & Explanation \\
+      \hline
+      \verb$!:$ & \lstinline$!:$ & Set membership \\
+      \verb$/:$ & \lstinline$/:$ & Set non-membership \\
+      \verb$<:$ & \lstinline$<:$ & Subset \\
+      \verb$/<:$ & \lstinline$/<:$ & Not a subset \\
+      \verb$<<:$ & \lstinline$<<:$ & Proper subset \\
+      \verb$/<<:$ & \lstinline$/<<:$ & Not a proper subset \\
+      \verb$!finite$ & \lstinline$!finite$ & Finite \\
+      \verb$!partition$ & \lstinline$!partition$ & Partition \\
+      \hline
+    \end{tabular}
+    \caption{Set predicates}
+  \end{table}
+  
+  
+  \begin{table}[!htbp]
+    \centering
+    \begin{tabular}{|l|l|l|}
+      \hline
+      ASCII & Symbols & Explanation \\
+      \hline
+      \verb$!BOOL$ & \lstinline$!BOOL$ & BOOL set \\
+      \verb$!TRUE$ & \lstinline$!TRUE$ & TRUE \\
+      \verb$!FALSE$ & \lstinline$!FALSE$ & FALSE \\
+      \verb$!bool$ & \lstinline$!bool$ & bool predicate \\
+      \hline
+    \end{tabular}
+    \caption{BOOL and bool}
+  \end{table}
+  
+  \begin{table}[!htbp]
+    \centering
+    \begin{tabular}{|l|l|l|}
+      \hline
+      ASCII & Symbols & Explanation \\
+      \hline
+      \verb$!INT$ & \lstinline$!INT$ & Set of integer numbers \\
+      \verb$!NAT$ & \lstinline$!NAT$ & Set of natural numbers \\
+      \verb$!NAT1$ & \lstinline$!NAT1$ & Set of positive natural numbers \\
+      \verb$!min$ & \lstinline$!min$ & Mininum \\
+      \verb$!max$ & \lstinline$!max$ & Maximum \\
+      \verb$-$ & \lstinline$-$ & Difference \\
+      \verb$*$ & \lstinline$*$ & Product \\
+      \verb$/$ & \lstinline$/$ & Quotient \\
+      \verb$!mod$ & \lstinline$!mod$ & Remainder \\
+      \verb$..$ & \lstinline$..$ & Interval  \\
+      \hline
+    \end{tabular}
+    \caption{Numbers}
+  \end{table}
+  
+  \begin{table}[!htbp]
+    \centering
+    \begin{tabular}{|l|l|l|}
+      \hline
+      ASCII & Symbols & Explanation \\
+      \hline
+      \verb$>$ & \lstinline$>$ & Greater \\
+      \verb$<$ & \lstinline$<$ & Less \\
+      \verb$>=$ & \lstinline$>=$ & Greater or equal \\
+      \verb$<=$ & \lstinline$<=$ & Less or equal \\
+      \hline
+    \end{tabular}
+    \caption{Number predicates}
+  \end{table}
+  
+  \begin{table}[!htbp]
+    \centering
+    \begin{tabular}{|l|l|l|}
+      \hline
+      ASCII & Symbols & Explanation \\
+      \hline
+      \verb$<->$ & \lstinline$<->$ & Relations \\
+      \verb$!dom$ & \lstinline$!dom$ & Domain \\
+      \verb$!ran$ & \lstinline$!ran$ & Range \\
+      \verb$<<->$ & \lstinline$<<->$ & Total relations \\
+      \verb$<->>$ & \lstinline$<<->$ & Surjective relations \\
+      \verb$<<->>$ & \lstinline$<<->>$ & Total surjective relations \\
+      \verb$!circ$ & \lstinline$!circ$ & Backward composition \\
+      \verb$!id$ & \lstinline$!id$ & Identity \\
+      \verb$<|$ & \lstinline$<|$ & Domain restriction \\
+      \verb$<<|$ & \lstinline$<<|$ & Domain subtraction \\
+      \verb$|>$ & \lstinline$|>$ & Range restriction \\
+      \verb$|>>$ & \lstinline$|>>$ & Range subtraction \\
+      \verb$~$ & \lstinline$~$ & Inverse \\
+      \verb$<+$ & \lstinline$<+$ & Overriding \\
+      \verb$><$ & \lstinline$><$ & Direct product \\
+      \verb$||$ & \lstinline$||$ & Parallel product \\
+      \verb$!prj1$ & \lstinline$!prj1$ & First projection \\
+      \verb$!prj2$ & \lstinline$!prj2$ & Second projection \\
+      \hline
+    \end{tabular}
+    \caption{Relations}
+  \end{table}
+  
+  \begin{table}[!htbp]
+    \centering
+    \begin{tabular}{|l|l|l|}
+      \hline
+      ASCII & Symbols & Explanation \\
+      \hline
+      \verb$+->$ & \lstinline$+->$ & Partial functions \\
+      \verb$-->$ & \lstinline$-->$ & Total functions \\
+      \verb$>+>$ & \lstinline$>+>$ & Partial injections \\
+      \verb$>->$ & \lstinline$>->$ & Total injections \\
+      \verb$+>>$ & \lstinline$+>>$ & Partial surjections \\
+      \verb$->>$ & \lstinline$->>$ & Total surjections \\
+      \verb$>->>$ & \lstinline$>->>$ & Bijections \\
+      \verb$%$ & \lstinline$%$ & Lambda abstraction \\
+      \hline
+    \end{tabular}
+    \caption{Functions}
+  \end{table}
+  
+  \begin{table}[!htbp]
+    \centering
+    \begin{tabular}{|l|l|l|}
+      \hline
+      ASCII & Symbols & Explanation \\
+      \hline
+      \verb$:=$ & \lstinline$:=$ & Becomes equal to \\
+      \verb$::$ & \lstinline$::$ & Choice from a set  \\
+      \verb$:|$ & \lstinline$:|$ & Choice by predicate \\
+      \hline
+    \end{tabular}
+    \caption{Functions}
+  \end{table}
+\end{EventBNoShortInline}
 
-
-\begin{table}[!htbp]
-  \centering
-  \begin{tabular}{|l|l|l|}
-    \hline
-    ASCII & Symbols & Explanation \\
-    \hline
-    \verb|!BOOL| & $!BOOL$ & BOOL set \\
-    \verb$!TRUE$ & $!TRUE$ & TRUE \\
-    \verb|!FALSE| & $!FALSE$ & FALSE \\
-    \verb|!bool| & $!bool$ & bool predicate \\
-    \hline
-  \end{tabular}
-  \caption{BOOL and bool}
-\end{table}
- 
-\begin{table}[!htbp]
-  \centering
-  \begin{tabular}{|l|l|l|}
-    \hline
-    ASCII & Symbols & Explanation \\
-    \hline
-    \verb|!INT| & $!INT$ & Set of integer numbers \\
-    \verb|!NAT| & $!NAT$ & Set of natural numbers \\
-    \verb|!NAT1| & $!NAT1$ & Set of positive natural numbers \\
-    \verb|!min| & $!min$ & Mininum \\
-    \verb|!max| & $!max$ & Maximum \\
-    \verb|-| & $-$ & Difference \\
-    \verb|*| & $*$ & Product \\
-    \verb|/| & $/$ & Quotient \\
-    \verb|!mod| & $!mod$ & Remainder \\
-    \verb|..| & $..$ & Interval  \\
-    \hline
-  \end{tabular}
-  \caption{Numbers}
-\end{table}
-
-\begin{table}[!htbp]
-  \centering
-  \begin{tabular}{|l|l|l|}
-    \hline
-    ASCII & Symbols & Explanation \\
-    \hline
-    \verb|>| & $>$ & Greater \\
-    \verb|<| & $<$ & Less \\
-    \verb|>=| & $>=$ & Greater or equal \\
-    \verb|<=| & $<=$ & Less or equal \\
-    \hline
-  \end{tabular}
-  \caption{Number predicates}
-\end{table}
-
-\begin{table}[!htbp]
-  \centering
-  \begin{tabular}{|l|l|l|}
-    \hline
-    ASCII & Symbols & Explanation \\
-    \hline
-    \verb|<->| & $<->$ & Relations \\
-    \verb|!dom| & $!dom$ & Domain \\
-    \verb|!ran| & $!ran$ & Range \\
-    \verb|<<->| & $<<->$ & Total relations \\
-    \verb|<->>| & $<<->$ & Surjective relations \\
-    \verb|<<->>| & $<<->>$ & Total surjective relations \\
-    \verb|!circ| & $!circ$ & Backward composition \\
-    \verb|!id| & $!id$ & Identity \\
-    \verb$<|$ & $<|$ & Domain restriction \\
-    \verb$<<|$ & $<<|$ & Domain subtraction \\
-    \verb$|>$ & $|>$ & Range restriction \\
-    \verb$|>>$ & $|>>$ & Range subtraction \\
-    \verb|~| & $~$ & Inverse \\
-    \verb|<+| & $<+$ & Overriding \\
-    \verb|><| & $><$ & Direct product \\
-    \verb$||$ & $||$ & Parallel product \\
-    \verb$!prj1$ & $!prj1$ & First projection \\
-    \verb$!prj2$ & $!prj2$ & Second projection \\
-    \hline
-  \end{tabular}
-  \caption{Relations}
-\end{table}
-
-\begin{table}[!htbp]
-  \centering
-  \begin{tabular}{|l|l|l|}
-    \hline
-    ASCII & Symbols & Explanation \\
-    \hline
-    \verb|+->| & $+->$ & Partial functions \\
-    \verb|-->| & $-->$ & Total functions \\
-    \verb|>+>| & $>+>$ & Partial injections \\
-    \verb|>->| & $>->$ & Total injections \\
-    \verb|+>>| & $+>>$ & Partial surjections \\
-    \verb|->>| & $->>$ & Total surjections \\
-    \verb|>->>| & $>->>$ & Bijections \\
-    \verb|%| & $%$ & Lambda abstraction \\
-    \hline
-  \end{tabular}
-  \caption{Functions}
-\end{table}
-
-\begin{table}[!htbp]
-  \centering
-  \begin{tabular}{|l|l|l|}
-    \hline
-    ASCII & Symbols & Explanation \\
-    \hline
-    \verb|:=| & $:=$ & Becomes equal to \\
-    \verb|::| & $::$ & Choice from a set  \\
-    \verb|:|| & $:|$ & Choice by predicate \\
-    \hline
-  \end{tabular}
-  \caption{Functions}
-\end{table}
- 
 More complete piece of code (including the Unicode symbols) can be typeset using the \verb|EventBcode| environment. Below is the typesetting of an \EventB machine.
 \begin{EventBcode}
 machine Sensor_m0_SNSR
