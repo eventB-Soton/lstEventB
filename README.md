@@ -49,8 +49,8 @@ and version 1.3c or later is part of all distributions of LaTeX version
 This work has the LPPL maintenance status `author-maintained'.
 
 The Current Maintainer of this work is
-[T.S. Hoang](T.S.Hoang@ecs.soton.ac.uk "T dot S dot Hoang at ecs dot soton dot ac dot uk") and
-[C. Zhu](C.Zhu@ecs.soton.ac.uk "C dot Zhu at ecs dot soton dot ac dot uk)
+[T.S.Hoang](mailto:T.S.Hoang@ecs.soton.ac.uk "T dot S dot Hoang at ecs dot soton dot ac dot uk") and
+[C. Zhu](mailto:C.Zhu@ecs.soton.ac.uk "C dot Zhu at ecs dot soton dot ac dot uk")
 
 --
 Copyright (C) 2018 University of Southampton
