@@ -15,16 +15,17 @@ We start first with some inline \EventB code by embedding them using a pair of \
     \hline
     ASCII & Symbols & Explanation \\
     \hline
-    \verb|false| & $false$ & False \\
-    \verb|true| & $true$ & True \\
+    \verb|!false| & $!false$ & False \\
+    \verb|!true| & $!true$ & True \\
     \verb|&| & $&$ & Conjunction \\
-    \verb|or| & $or$ & Disjunction \\
+    \verb|!or| & $!or$ & Disjunction \\
     \verb|=>| & $=>$ & Implication \\
     \verb|<=>| & $<=>$ & Equivalence \\
-    \verb|not| & $not$ & Negation \\
+    \verb|!not| & $!not$ & Negation \\
     \verb|!| & $!$ & Universal quantification \\
     \verb|#| & $#$ & Existential quantification \\
     \verb|.| & $.$ & Quantification dot \\
+    \verb|=| & $=$ & Equality \\
     \verb|/=| & $/=$ & Inequality \\
     \hline
   \end{tabular}
@@ -42,14 +43,15 @@ We start first with some inline \EventB code by embedding them using a pair of \
     \verb|\/| & $\/$ & Union \\
     \verb|/\| & $/\$ & Intersection \\
     \verb$\$ & $\$ & Set difference \\
+    \verb$|->$ & $|->$ & Ordered pair \\
     \verb|**| & $**$ & Cartesian product \\
-    \verb|POW| & $POW$ & Powerset \\
-    \verb|POW1| & $POW1$ & Non-empty subsets \\
-    \verb|card| & $card$ & Cardinality \\
-    \verb|union| & $union$ & Generalised union \\
-    \verb|inter| & $inter$ & Generalised intersection \\
-    \verb|UNION| & $UNION$ & Quantified union \\
-    \verb|INTER| & $INTER$ & Quantified intersection \\
+    \verb|!POW| & $!POW$ & Powerset \\
+    \verb|!POW1| & $!POW1$ & Non-empty subsets \\
+    \verb|!card| & $!card$ & Cardinality \\
+    \verb|!union| & $!union$ & Generalised union \\
+    \verb|!inter| & $!inter$ & Generalised intersection \\
+    \verb|!UNION| & $!UNION$ & Quantified union \\
+    \verb|!INTER| & $!INTER$ & Quantified intersection \\
     \hline
   \end{tabular}
   \caption{Sets}
@@ -67,8 +69,8 @@ We start first with some inline \EventB code by embedding them using a pair of \
     \verb|/<:| & $/<:$ & Not a subset \\
     \verb|<<:| & $<<:$ & Proper subset \\
     \verb|/<<:| & $/<<:$ & Not a proper subset \\
-    \verb|finite| & $finite$ & Finite \\
-    \verb|partition| & $partition$ & Partition \\
+    \verb|!finite| & $!finite$ & Finite \\
+    \verb|!partition| & $!partition$ & Partition \\
     \hline
   \end{tabular}
   \caption{Set predicates}
@@ -81,10 +83,10 @@ We start first with some inline \EventB code by embedding them using a pair of \
     \hline
     ASCII & Symbols & Explanation \\
     \hline
-    \verb|BOOL| & $BOOL$ & BOOL set \\
-    \verb$TRUE$ & $TRUE$ & TRUE \\
-    \verb|FALSE| & $FALSE$ & FALSE \\
-    \verb|bool| & $bool$ & bool predicate \\
+    \verb|!BOOL| & $!BOOL$ & BOOL set \\
+    \verb$!TRUE$ & $!TRUE$ & TRUE \\
+    \verb|!FALSE| & $!FALSE$ & FALSE \\
+    \verb|!bool| & $!bool$ & bool predicate \\
     \hline
   \end{tabular}
   \caption{BOOL and bool}
@@ -96,15 +98,15 @@ We start first with some inline \EventB code by embedding them using a pair of \
     \hline
     ASCII & Symbols & Explanation \\
     \hline
-    \verb|INT| & $INT$ & Set of integer numbers \\
-    \verb|NAT| & $NAT$ & Set of natural numbers \\
-    \verb|NAT1| & $NAT1$ & Set of positive natural numbers \\
-    \verb|min| & $min$ & Mininum \\
-    \verb|max| & $max$ & Maximum \\
+    \verb|!INT| & $!INT$ & Set of integer numbers \\
+    \verb|!NAT| & $!NAT$ & Set of natural numbers \\
+    \verb|!NAT1| & $!NAT1$ & Set of positive natural numbers \\
+    \verb|!min| & $!min$ & Mininum \\
+    \verb|!max| & $!max$ & Maximum \\
     \verb|-| & $-$ & Difference \\
     \verb|*| & $*$ & Product \\
     \verb|/| & $/$ & Quotient \\
-    \verb|mod| & $mod$ & Remainder \\
+    \verb|!mod| & $!mod$ & Remainder \\
     \verb|..| & $..$ & Interval  \\
     \hline
   \end{tabular}
@@ -133,13 +135,13 @@ We start first with some inline \EventB code by embedding them using a pair of \
     ASCII & Symbols & Explanation \\
     \hline
     \verb|<->| & $<->$ & Relations \\
-    \verb|dom| & $dom$ & Domain \\
-    \verb|ran| & $ran$ & Range \\
+    \verb|!dom| & $!dom$ & Domain \\
+    \verb|!ran| & $!ran$ & Range \\
     \verb|<<->| & $<<->$ & Total relations \\
     \verb|<->>| & $<<->$ & Surjective relations \\
     \verb|<<->>| & $<<->>$ & Total surjective relations \\
-    \verb|circ| & $circ$ & Backward composition \\
-    \verb|id| & $id$ & Identity \\
+    \verb|!circ| & $!circ$ & Backward composition \\
+    \verb|!id| & $!id$ & Identity \\
     \verb$<|$ & $<|$ & Domain restriction \\
     \verb$<<|$ & $<<|$ & Domain subtraction \\
     \verb$|>$ & $|>$ & Range restriction \\
@@ -148,8 +150,8 @@ We start first with some inline \EventB code by embedding them using a pair of \
     \verb|<+| & $<+$ & Overriding \\
     \verb|><| & $><$ & Direct product \\
     \verb$||$ & $||$ & Parallel product \\
-    \verb$prj1$ & $prj1$ & First projection \\
-    \verb$prj2$ & $prj2$ & Second projection \\
+    \verb$!prj1$ & $!prj1$ & First projection \\
+    \verb$!prj2$ & $!prj2$ & Second projection \\
     \hline
   \end{tabular}
   \caption{Relations}
