@@ -34,7 +34,7 @@
 % 
 %<*driver> 
 \documentclass[a4paper]{ltxdoc}
-\usepackage{lstEventB}
+\usepackage[colour]{lstEventB}
 \EnableCrossrefs
 % ^^A\CodelineIndex
 \PageIndex
@@ -116,15 +116,91 @@
 % 
 % ^^A %%%%% Usage %%%%%%
 % \section{Usage}
+% \label{sec:usage}
 % 
 % Just like any other package, you need to request this package with a
-% |\usepackage| command in the preamble.  So in the simpler case
+% \verb|\usepackage| command in the preamble.  So in the simpler case
 % (i.e., without any options), one just types
 % 
 % \indent |\usepackage{lstEventB}|
 %
 % \noindent to load the package.
 % 
+% \subsection{Package Options}
+% \label{sec:package-options-usage}
+%
+% \paragraph{Colouring Option.}
+% Loading package with the \verb|colour| or \verb|color| options will enable the
+% various colouring of the Event-B code.
+%
+% \subsection{Typesetting \EventB Code}
+% \label{sec:types-eventb-code}
+%
+% The current supported syntax are from XEvent-B (cite XEvent-B paper). In particular, the
+% \EventB mathematical symbols can be typeset using Unicode symbols.
+% Alternatively, the mathematical symbols can be typeset using ASCII
+% combinations (similar to the \EventB Summary (cite Ken Robinson)),
+% with the exception that the \emph{text} combinations must be prefixed
+% by |!| (this is to prevent unintended translation of text in longer words). Some
+% other symbols, e.g. |.| and \verb$|$ also need to be |!|-prefixed.
+%
+% Table~\ref{tab:predicates} shows the ASCII input for typesetting
+% predicate-related symbols.
+% \begin{EventBNoShortInline}
+%   \begin{table}[!htbp]
+%     \centering
+%     \begin{tabular}{|l|l|l|}
+%         \hline
+%         ASCII & Symbols & Explanation \\
+%         \hline
+%         \verb$!false$ & \lstinline$!false$ & False \\
+%         \verb$!true$ & \lstinline$!true$ & True \\
+%         \verb$&$ & \lstinline$&$ & Conjunction \\
+%         \verb$!or$ & \lstinline$!or$ & Disjunction \\
+%         \verb$=>$ & \lstinline$=>$ & Implication \\
+%         \verb$<=>$ & \lstinline$<=>$ & Equivalence \\
+%         \verb$!not$ & \lstinline$!not$ & Negation \\
+%         \verb$!$ & \lstinline$!$ & Universal quantification \\
+%         \verb$#$ & \lstinline$#$ & Existential quantification \\
+%         \verb$!.$ & \lstinline$.$ & Quantification dot \\
+%         \verb$=$ & \lstinline$=$ & Equality \\
+%         \verb$/=$ & \lstinline$/=$ & Inequality \\
+%         \hline
+%     \end{tabular}
+%     \caption{Predicates}
+%     \label{tab:predicates}
+%   \end{table}
+% \end{EventBNoShortInline}
+%
+% Table~\ref{tab:sets} shows the ASCII inputs for typesetting
+% set-related symbols.
+% \begin{EventBNoShortInline}
+%   \begin{table}[!htbp]
+%     \centering
+%     \begin{tabular}{|l|l|l|}
+%         \hline
+%         ASCII & Symbols & Explanation \\
+%         \hline
+%         \verb${}$ & \lstinline${}$ & Empty set \\
+%         \verb$|$ & \lstinline$|$ & Vertical bar, e.g., in set comprehension \\
+%         \verb$\/$ & \lstinline$\/$ & Union \\
+%         \verb$/\$ & \lstinline$/\$ & Intersection \\
+%         \verb$\$ & \lstinline$\$ & Set difference \\
+%         \verb$|->$ & \lstinline$|->$ & Ordered pair \\
+%         \verb$**$ & \lstinline$**$ & Cartesian product \\
+%         \verb$!POW$ & \lstinline$!POW$ & Powerset \\
+%         \verb$!POW1$ & \lstinline$!POW1$ & Non-empty subsets \\
+%         \verb$!card$ & \lstinline$!card$ & Cardinality \\
+%         \verb$!union$ & \lstinline$!union$ & Generalised union \\
+%         \verb$!inter$ & \lstinline$!inter$ & Generalised intersection \\
+%         \verb$!UNION$ & \lstinline$!UNION$ & Quantified union \\
+%         \verb$!INTER$ & \lstinline$!INTER$ & Quantified intersection \\
+%         \hline
+%     \end{tabular}
+%     \caption{Sets}
+%     \label{tab:sets}
+%   \end{table}
+% \end{EventBNoShortInline}
 % \StopEventually{
 % \PrintChanges
 % \PrintIndex
@@ -150,6 +226,7 @@
 \RequirePackage{xcolor}
 \RequirePackage{bsymb}
 \RequirePackage{xargs}
+\RequirePackage{mdframed}
 %    \end{macrocode}
 %
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
@@ -460,7 +537,6 @@
   {>=}{{$\geq$}}1% Greater or equal
   {<=}{{$\leq$}}1% Less or equal
   % ASCII Predicates
-  {/}{{$\div$}}1% Quotient (This is moved here from ASCII Numbers)
   {!false}{{$\bfalse$}}1% False
   {!true}{{$\btrue$}}1% True
   {\&}{{$\land$}}1% Conjunction (note the backslash)
@@ -469,10 +545,9 @@
   {<=>}{{$\leqv$}}1% Equivalence
   {!not}{{$\lnot$}}1% Negation
   {\#}{{$\exists$}}1% Existential quantification (note the backslash)
-  {.}{{$\qdot$}}1% Quantification dot
+  {!.}{{$\qdot$}}1% Quantification dot
   {/=}{{$\neq$}}1% Inequality
   % ASCII Sets
-  {*}{{$\times$}}1% Product (This is moved here from ASCII Numbers)
   {\{\}}{{$\emptyset$}}1% Empty set (note the backslashes)
   {\|}{{$\mid$}}1% Vertical bar, e.g., in set comprehension (not the backslash)
   {\\}{{$\setminus$}}1% Difference
@@ -496,6 +571,8 @@
   {!NAT}{{$\nat$}}1% Set of natural numbers
   {!NAT1}{{$\natn$}}1% Set of positive natural numbers
   {-}{{$-$}}1% Difference
+  {!*}{{$\times$}}1% Product (Note the !)
+  {!/}{{$\div$}}1% Quotient (Note the !)
   {..}{{$\upto$}}1% Interval
   % ASCII Relations
   {<->}{{$\rel$}}1% Relations
