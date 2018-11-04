@@ -291,7 +291,8 @@
 }
 
 % Type setting inline Event-B code using |
-\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]|
+\lstMakeShortInline%
+[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]|%
 
 % Multi-line Event-B code should be wrapped in EventBcode environment.
 \lstnewenvironment{EventBcode}{\lstset{language=Event-B}}{}
@@ -299,10 +300,18 @@
 % Multi-line Event-B code should be wrapped in EventBcode environment.
 \newenvironment{EventBNoShortInline}
 {
+  % Remove the short-inline
   \lstDeleteShortInline|
+  % Set the language to be Event-B
   \lstset{language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize}
 }
-{\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]|}
+{
+  % Restore the short inline
+  \lstMakeShortInline[language=Event-B,breaklines=f,basicstyle=\rmfamily\normalsize]|
+}
+\newcommand{\EventBInline}[1]{%
+  \lstinline[language=Event-B, breaklines=f,basicstyle=\rmfamily\normalsize]$#1$
+}
 \lstset{%
   columns=fullflexible, % The columns are fully flexible.
   numberbychapter=false,

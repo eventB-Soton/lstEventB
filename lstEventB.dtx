@@ -136,7 +136,7 @@
 % \subsection{Typesetting \EventB Code}
 % \label{sec:types-eventb-code}
 %
-% The current supported syntax are from XEvent-B (cite XEvent-B paper). In particular, the
+% The current supported syntax are from CamilleX (cite XEvent-B paper). In particular, the
 % \EventB mathematical symbols can be typeset using Unicode symbols.
 % Alternatively, the mathematical symbols can be typeset using ASCII
 % combinations (similar to the \EventB Summary (cite Ken Robinson)),
@@ -614,9 +614,10 @@
 %<lstEventB>% Type setting inline Event-B code using |
 % \fi ^^A END Produce comments only in the resulting style file
 %    \begin{macrocode}
-\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]|
+\lstMakeShortInline%
+[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]|%
 %    \end{macrocode}
-% We then create a dedicated |EventBcode| environment using |lstnewenvironment|.
+% We then create a dedicated \verb|EventBcode| environment using \verb|lstnewenvironment|.
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
 %<lstEventB>
 %<lstEventB>% Multi-line Event-B code should be wrapped in EventBcode environment.
@@ -625,7 +626,7 @@
 \lstnewenvironment{EventBcode}{\lstset{language=Event-B}}{}
 %    \end{macrocode}
 %
-% We then create a dedicated |EventBNoInline| environment using |newenvironment|.
+% We then create a dedicated \verb|EventBNoInline| environment using \verb|newenvironment|.
 % \iffalse ^^A BEGIN Produce comments only in the resulting style file
 %<lstEventB>
 %<lstEventB>% Multi-line Event-B code should be wrapped in EventBcode environment.
@@ -633,10 +634,18 @@
 %    \begin{macrocode}
 \newenvironment{EventBNoShortInline}
 {
+  % Remove the short-inline
   \lstDeleteShortInline|
+  % Set the language to be Event-B
   \lstset{language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize}
 }
-{\lstMakeShortInline[language=Event-B, breaklines=f, basicstyle=\rmfamily\normalsize]|}
+{
+  % Restore the short inline
+  \lstMakeShortInline[language=Event-B,breaklines=f,basicstyle=\rmfamily\normalsize]|
+}
+\newcommand{\EventBInline}[1]{%
+  \lstinline[language=Event-B, breaklines=f,basicstyle=\rmfamily\normalsize]$#1$
+}
 %    \end{macrocode}
 %
 % Finally, we set some appearance parameters for display the code.
