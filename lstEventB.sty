@@ -27,7 +27,7 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}\relax
 \ProvidesPackage{lstEventB}
-    [2018/05/14 v1.0 Package for listing Event-B code]
+    [2020/03/28 v1.1 Package for listing Event-B code]
 
 %%%%% BEGIN Package loading %%%%%
 \RequirePackage{listings}
@@ -36,6 +36,59 @@
 \RequirePackage{bsymb}
 \RequirePackage{xargs}
 \RequirePackage{mdframed}
+\DeclareUnicodeCharacter{22A5}{$\bfalse$}
+\DeclareUnicodeCharacter{22A4}{$\btrue$}
+\DeclareUnicodeCharacter{2227}{$\land$}
+\DeclareUnicodeCharacter{2228}{$\lor$}
+\DeclareUnicodeCharacter{21D2}{$\limp$}
+\DeclareUnicodeCharacter{21D4}{$\leqv$}
+\DeclareUnicodeCharacter{2200}{$\forall$}
+\DeclareUnicodeCharacter{2203}{$\exists$}
+\DeclareUnicodeCharacter{2260}{$\neq$}
+\DeclareUnicodeCharacter{2205}{$\emptyset$}
+\DeclareUnicodeCharacter{2223}{$\mid$}
+\DeclareUnicodeCharacter{222A}{$\bunion$}
+\DeclareUnicodeCharacter{2229}{$\binter$}
+\DeclareUnicodeCharacter{2216}{$\setminus$}
+\DeclareUnicodeCharacter{21A6}{$\mapsto$}
+\DeclareUnicodeCharacter{2119}{$\pow$}
+\DeclareUnicodeCharacter{22C3}{$\Union$}
+\DeclareUnicodeCharacter{22C2}{$\Inter$}
+\DeclareUnicodeCharacter{2208}{$\in$}
+\DeclareUnicodeCharacter{2209}{$\notin$}
+\DeclareUnicodeCharacter{2286}{$\subseteq$}
+\DeclareUnicodeCharacter{2288}{$\not\subseteq$}
+\DeclareUnicodeCharacter{2282}{$\subset$}
+\DeclareUnicodeCharacter{2284}{$\not\subset$}
+\DeclareUnicodeCharacter{2124}{$\intg$}
+\DeclareUnicodeCharacter{2115}{$\nat$}
+\DeclareUnicodeCharacter{2212}{$-$}
+\DeclareUnicodeCharacter{2217}{$*$}
+\DeclareUnicodeCharacter{2025}{$\upto$}
+\DeclareUnicodeCharacter{2265}{$\geq$}
+\DeclareUnicodeCharacter{2264}{$\leq$}
+\DeclareUnicodeCharacter{2194}{$\rel$}
+\DeclareUnicodeCharacter{E100}{$\trel$}
+\DeclareUnicodeCharacter{E101}{$\srel$}
+\DeclareUnicodeCharacter{E102}{$\strel$}
+\DeclareUnicodeCharacter{2218}{$\circ$}
+\DeclareUnicodeCharacter{25C1}{$\domres$}
+\DeclareUnicodeCharacter{2A64}{$\domsub$}
+\DeclareUnicodeCharacter{25B7}{$\ranres$}
+\DeclareUnicodeCharacter{2A65}{$\ransub$}
+\DeclareUnicodeCharacter{223C}{$\mathtt{\sim}$}
+\DeclareUnicodeCharacter{E103}{$\ovl$}
+\DeclareUnicodeCharacter{2297}{$\dprod$}
+\DeclareUnicodeCharacter{2225}{$\pprod$}
+\DeclareUnicodeCharacter{21F8}{$\pfun$}
+\DeclareUnicodeCharacter{2914}{$\pinj$}
+\DeclareUnicodeCharacter{21A3}{$\tinj$}
+\DeclareUnicodeCharacter{2900}{$\psur$}
+\DeclareUnicodeCharacter{21A0}{$\tsur$}
+\DeclareUnicodeCharacter{2916}{$\tbij$}
+\DeclareUnicodeCharacter{03BB}{$\lambda$}
+\DeclareUnicodeCharacter{2254}{$\bcmeq$}
+
 %%%%% END Package loading %%%%%
 
 %%%%% BEGIN Declaration of options %%%%%
@@ -160,9 +213,9 @@
   {∈}{{$\in$}}1% Set membership
   {∉}{{$\notin$}}1% Set non-membership
   {⊆}{{$\subseteq$}}1% Subset
-  {⊈}{{$\nsubseteq$}}1% Not a subset
+  {⊈}{{$\not\subseteq$}}1% Not a subset
   {⊂}{{$\subset$}}1% Proper subset
-  {⊄}{{$\nsubset$}}1% Not a proper subset
+  {⊄}{{$\not\subset$}}1% Not a proper subset
   {!finite}{{$\finite$}}1% Finite set
   {!partition}{{$\partition$}}1% Partition
   % Bool and bool
@@ -178,7 +231,7 @@
   {!max}{{$\max$}}1% Maximum
   {+}{{$+$}}1% Sum
   {−}{{$-$}}1% Difference
-  {∗}{{$\times$}}1% Product
+  {∗}{{$*$}}1% Product
   {÷}{{$\div$}}1% Quotient
   {!mod}{{$\textrm{mod}$}}1% Remainder
   {‥}{{$\upto$}}1% Interval
@@ -198,7 +251,7 @@
   {⩤}{{$\domsub$}}1% Domain subtraction
   {▷}{{$\ranres$}}1% Range restriction
   {⩥}{{$\ransub$}}1% Range subtraction
-  {∼}{{$^{-1}$}}1% Inverse
+  {∼}{{$\mathtt{\sim}$}}1% Inverse
   {}{{$\ovl$}}1% Overriding
   {⊗}{{$\dprod$}}1% Direct product
   {∥}{{$\pprod$}}1% Parallel product
@@ -257,7 +310,7 @@
   {!NAT}{{$\nat$}}1% Set of natural numbers
   {!NAT1}{{$\natn$}}1% Set of positive natural numbers
   {-}{{$-$}}1% Difference
-  {!*}{{$\times$}}1% Product (Note the !)
+  {!*}{{$*$}}1% Product (Note the !)
   {!/}{{$\div$}}1% Quotient (Note the !)
   {..}{{$\upto$}}1% Interval
   % ASCII Relations
@@ -270,7 +323,7 @@
   {<<|}{{$\domsub$}}1% Domain subtraction
   {|>}{{$\ranres$}}1% Range restriction
   {|>>}{{$\ransub$}}1% Range subtraction
-  {~}{{$^{-1}$}}1% Inverse
+  {~}{{$\mathtt{\sim}$}}1% Inverse
   {<+}{{$\ovl$}}1% Overriding
   {><}{{$\dprod$}}1% Direct product
   {||}{{$\pprod$}}1% Parallel product
