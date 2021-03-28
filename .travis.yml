@@ -3,4 +3,4 @@ jdk:
   - oraclejdk15
   
 script:
-  - ./gradlew all
+  - gradle all
