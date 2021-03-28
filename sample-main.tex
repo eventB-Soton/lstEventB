@@ -7,7 +7,7 @@
 \maketitle
 For convenient, we define macro \verb|\EventB| for \EventB. 
 
-We start first with some inline \EventB code by embedding them using a pair of \verb$|$, for example \verb$|@grd1: "SNSR = FALSE"|$ gives |@grd1: "SNSR = FALSE"|. Any \EventB formulae including Unicode symbols will be typeset using the \verb|bsymb| package accordingly.
+We start first with some inline \EventB code by embedding them using a pair of \verb$|$, for example \verb$|@grd1: SNSR = FALSE|$ gives |@grd1: SNSR = FALSE|. Any \EventB formulae including Unicode symbols will be typeset using the \verb|bsymb| package accordingly.
 
 \begin{EventBNoShortInline}
   \begin{table}[!htbp]
@@ -150,26 +150,26 @@ machine Sensor_m0_SNSR
 variables
 	SNSR
 invariants
-	@thm0_1: "SNSR ∈ BOOL" theorem
+	theorem @thm0_1: SNSR ∈ BOOL
 events
 
 	INITIALISATION
 	begin
-		@act1: "SNSR ≔ FALSE"
+		@act1: SNSR ≔ FALSE
 	end
 
 	SNSR_on
 	when
-		@grd1: "SNSR = FALSE"
+		@grd1: SNSR = FALSE
 	then
-		@act1: "SNSR ≔ TRUE"
+		@act1: SNSR ≔ TRUE
 	end
 
 	SNSR_off
 	when
-		@grd1: "SNSR = TRUE"
+		@grd1: SNSR = TRUE
 	then
-		@act1: "SNSR ≔ FALSE"
+		@act1: SNSR ≔ FALSE
 	end
 
 end
@@ -181,7 +181,7 @@ machine Sensor_m0_SNSR
 variables
 	SNSR
 invariants
-	@thm0_1: "SNSR ∈ BOOL" theorem
+	theorem @thm0_1: SNSR ∈ BOOL
 \end{EventBcode}
 
 One can includes external file containing \EventB code using the \verb|\EventBinputlisting| command.  For example the following is the result of including the code in the file \verb|Sensor_m1_DEP.bumx| using \verb|\EventBinputlisting{Sensor_m1_DEP.bumx}|.
