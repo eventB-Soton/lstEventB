@@ -1,6 +1,5 @@
 language: java
-jdk:
-  - openjdk15
-  
+install:
+   - echo "Override default Travis install step to avoid unnecessary './gradlew assemble'."  
 script:
-  - gradle all
+  - ./gradlew build --scan -s
