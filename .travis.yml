@@ -1,4 +1,7 @@
 language: java
+jdk:
+  - oraclejdk14
+
 matrix:
   include:
     - os: linux
@@ -21,4 +24,4 @@ install:
   - . ./install-tex.sh
 
 script:
-  - ./gradlew build --scan -s
+  - . ./gradlew build --scan -s
