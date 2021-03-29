@@ -1,9 +1,24 @@
 language: java
+matrix:
+  include:
+    - os: linux
+      dist: bionic
+
+cache:
+  directories:
+    - $HOME/texlive
+    - $HOME/.texlive
+    - $HOME/texmf
+
+sudo: false
+
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y texlive-base texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
+  - wget https://raw.githubusercontent.com/y-yu/install-tex-travis/master/install-tex.sh
+  - wget https://raw.githubusercontent.com/y-yu/install-tex-travis/master/tlmgr.sh
+  - chmod +x install-tex.sh tlmgr.sh
 
 install:
-   - echo "Override default Travis install step to avoid unnecessary './gradlew assemble'."  
+  - . ./install-tex.sh
+
 script:
   - ./gradlew build --scan -s
