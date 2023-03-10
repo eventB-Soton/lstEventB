@@ -16,12 +16,11 @@ cache:
 sudo: false
 
 before_install:
-  - wget https://raw.githubusercontent.com/y-yu/install-tex-travis/master/install-tex.sh
-  - wget https://raw.githubusercontent.com/y-yu/install-tex-travis/master/tlmgr.sh
-  - chmod +x install-tex.sh tlmgr.sh
+  - sudo apt-get -qq update
+  - sudo apt-get install -y texlive-base texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
 
 install:
-  - . ./install-tex.sh
+  - echo "Override default Travis install step to avoid unnecessary './gradlew assemble'."
 
 script:
-  - . ./gradlew build --scan -s
+  - ./gradlew build --scan -s
