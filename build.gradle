@@ -85,6 +85,7 @@ void pdf_steps() {
 
 SAMPLE_FILES.each { def sampleFile -> 
   task "$SAMPLE_PREFIX$sampleFile"() {
+    dependsOn sty
     inputs.files STYFile, sampleFile+".tex", 'sample-main.tex'
     outputs.file sampleFile+".pdf"
     doLast{
