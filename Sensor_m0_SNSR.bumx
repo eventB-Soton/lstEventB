@@ -6,27 +6,27 @@ variables
 
 invariants
 
-	@thm0_1: "SNSR ∈ BOOL" theorem
+	theorem @thm0_1: SNSR ∈ BOOL
 
 events
 
 	INITIALISATION
 	begin
-		@act1: "SNSR ≔ FALSE"
+		@act1: SNSR ≔ FALSE
 	end
 
 	SNSR_on
 	when
-		@grd1: "SNSR = FALSE"
+		@grd1: SNSR = FALSE
 	then
-		@act1: "SNSR ≔ TRUE"
+		@act1: SNSR ≔ TRUE
 	end
 
 	SNSR_off
 	when
-		@grd1: "SNSR = TRUE"
+		@grd1: SNSR = TRUE
 	then
-		@act1: "SNSR ≔ FALSE"
+		@act1: SNSR ≔ FALSE
 	end
 
 end
