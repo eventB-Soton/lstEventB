@@ -28,7 +28,7 @@ jobs:
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
-      uses: uses: xu-cheng/texlive-action/full@v1
+      uses: xu-cheng/texlive-action/full@v1
         with:
           run: |
             ./gradlew build --scan -s
