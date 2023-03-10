@@ -1,3 +1,6 @@
+[![Latest
+Status](https://github.com/eventB-Soton/lstEventB/actions/workflows/latex.yml/badge.svg?branch=latest)](https://github.com/eventB-Soton/lstEventB/actions/workflows/latex.yml/badge.svg)
+
 Listing Event-B models
 ======================
 
