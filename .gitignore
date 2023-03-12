@@ -9,3 +9,5 @@
 *.rel
 *.synctex.gz
 *.toc
+venv/
+site/
