@@ -1,0 +1,39 @@
+site_name: lstEventB
+
+plugins:
+  - mike:
+      # these fields are all optional; the defaults are as below...
+      version_selector: true   # set to false to leave out the version selector
+      css_dir: css             # the directory to put the version selector's CSS
+      javascript_dir: js       # the directory to put the version selector's JS
+      canonical_version: null  # the version for <link rel="canonical">; `null`
+                               # uses the version specified via `mike deploy`
+  - i18n:
+      default_language: en
+      languages:
+        default:
+          name: Default (en)
+          build: true
+        en:
+          name: English
+          build: true
+        vi:
+          name: Tiếng Việt
+          build: true
+  - with-pdf
+  - search
+
+site_description: lstEventB.sty -- A LaTeX package for listing Event-B models
+site_author: Thai Son Hoang
+
+repo_url: https://eventB-soton.github.io/lstEventB
+theme: material
+
+nav:
+- Home: index.md
+- User Guide:
+  - Package Options: user_guide/package_options.md
+
+extra:
+  version:
+    provider: mike
