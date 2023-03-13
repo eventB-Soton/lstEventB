@@ -4,22 +4,20 @@ variables
 	SNSR
 	DEP
 invariants
-	@inv0_1: "DEP ∈ ℕ"
+	@inv0_1: DEP ∈ ℕ
 events
 
 	INITIALISATION extended
 	begin
-		@act2: "DEP ≔ 0"
+		@act2: DEP ≔ 0
 	end
 
-	SNSR_on extended
-	refines SNSR_on
+	SNSR_on extends SNSR_on
 	end
 
-	SNSR_off extended
-	refines SNSR_off
+	SNSR_off extends SNSR_off
 	begin
-		@act2: "DEP ≔ DEP + 1"
+		@act2: DEP ≔ DEP + 1
 	end
 
 end
