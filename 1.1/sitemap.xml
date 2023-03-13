@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+         <loc>None./</loc>
+         <lastmod>2023-03-13</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="Noneen/"/>
+         <xhtml:link rel="alternate" hreflang="vi" href="Nonevi/"/>
+         
+    </url>
+    <url>
+         <loc>Noneuser_guide/package_loading_and_options/</loc>
+         <lastmod>2023-03-13</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="Noneen/user_guide/package_loading_and_options/"/>
+         <xhtml:link rel="alternate" hreflang="vi" href="Nonevi/user_guide/package_loading_and_options/"/>
+         
+    </url>
+    <url>
+         <loc>Noneuser_guide/typesetting_Event-B_models/</loc>
+         <lastmod>2023-03-13</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="Noneen/user_guide/typesetting_Event-B_models/"/>
+         <xhtml:link rel="alternate" hreflang="vi" href="Nonevi/user_guide/typesetting_Event-B_models/"/>
+         
+    </url>
+</urlset>
